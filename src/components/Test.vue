@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     login() {
-      getData({ apiKey: 'login', data: { phone: '18819253767', password: 'bob961219' } })
+      getData({ apiKey: 'login', data: { phone: '18819253767', password: '14331015' } })
         .then(data => {
           this.msg_1 = data;
         })

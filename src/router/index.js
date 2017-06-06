@@ -2,13 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Test from '@/components/Test'
 
-import CinDetail from '@/components/pages/CinDetail'
-import Home from '@/components/pages/Home'
-import LoginRegister from '@/components/pages/LoginRegister'
-import MovDetail from '@/components/pages/MovDetail'
-import MovList from '@/components/pages/MovList'
-import PayDetail from '@/components/pages/PayDetail'
-import TicketBook from '@/components/pages/TicketBook'
+import CinDetail from '@/components/pages/CinDetail/CinDetail'
+import Home from '@/components/pages/Home/Home'
+import LoginRegister from '@/components/pages/LoginRegister/LoginRegister'
+import MovDetail from '@/components/pages/MovDetail/MovDetail'
+import MovList from '@/components/pages/MovList/MovList'
+import PayDetail from '@/components/pages/PayDetail/PayDetail'
+import TicketBook from '@/components/pages/TicketBook/TicketBook'
 
 Vue.use(Router)
 

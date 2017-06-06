@@ -3,7 +3,7 @@
     <div>{{ title }}</div>
     <div>负责人：{{ people }}</div>
     <router-link :to="{ name: 'MovList' }">跳转到电影列表页面</router-link>
-    <router-link :to="{ name: 'LoginRegister'}">登录注册页面</router-link>
+    <router-link :to="{ name: 'LoginRegister' }">登录注册页面</router-link>
   </div>
 </template>
 

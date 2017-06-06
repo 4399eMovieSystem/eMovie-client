@@ -3,7 +3,6 @@
  */
 
 import { getAPI } from './apis.js'
-import { baseUrl } from '../config'
 import axios from 'axios'
 
 /**

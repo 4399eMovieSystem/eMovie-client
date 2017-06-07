@@ -266,7 +266,7 @@
 
   #header-search-input:empty:before {
     content: attr(placeholder);
-    color: grey;
+    color: rgba(0, 0, 0, 0.3);
   }
 
   #header-search-btn {

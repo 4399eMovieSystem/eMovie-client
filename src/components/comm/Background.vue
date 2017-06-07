@@ -39,7 +39,7 @@
   }
 
   #background-bg {
-    min-width: 1050px;
+    min-width: 1500px;
     width: 100%;
     height: 100%;
     background-image: url("../../assets/background/bg1.jpg")

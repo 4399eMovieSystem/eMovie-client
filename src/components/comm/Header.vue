@@ -265,7 +265,7 @@
     width: 35px;
     border-radius: 871px;
     right: 2%;
-    //box-sizing: border-box;
+    overflow: hidden;
     background-color: white;
     cursor: pointer;
   }

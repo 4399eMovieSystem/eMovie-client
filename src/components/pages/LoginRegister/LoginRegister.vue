@@ -111,10 +111,10 @@
 
   }
   #Login-title {
-    font-size: 30pt;
+    font-size: 18pt;
 
     position: absolute;
-    left: 65%;
+    left: 63%;
     top: 30%;
     color: rgb(175,140,110);
   }
@@ -131,7 +131,7 @@
   #Register-textul {
     position: absolute;
     left: 50%;
-    top: 25%; 
+    top: 30%; 
     text-align: right;
     color: #51514F;
   }
@@ -143,9 +143,10 @@
   }
   #Register-title {
     position: absolute;
-    left: 60%;
-    top: 15%;
-    color: #DDD60F;
+    left: 53%;
+     font-size: 18pt;
+    top: 22%;
+    color: rgb(175,140,110);
   }
   #Register-phone {
     display: block;
@@ -169,6 +170,6 @@
   #Register-ul {
     position: absolute;
     left: 60%;
-    top: 25%;
+    top: 30%;
   }
 </style>

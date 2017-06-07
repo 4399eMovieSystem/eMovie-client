@@ -28,7 +28,7 @@
         <button id="Register-codeButton" @click="register_sms" class="LoginRegister-button">获取验证码</button>
         <input id="Register-password" type="password" title="输入密码" placeholder="输入密码">
         <input id="Register-password2" type="password" title="重新输入密码" placeholder="确认密码">
-        <button @click="register" class="LoginRegister-button">注册</button>
+        <button @click="register" id="Register-button" class="LoginRegister-button">注册</button>
       </ul>
     </div>
   </div>
@@ -91,9 +91,11 @@
 
     font-family: Georgia, Garamond, serif;
     color: white;
-    font: 18pt;
 
     margin-right: 50px;
+  }
+  #Register-button {
+       font-size: 18pt;
   }
   #LoginRegister-cinema {
     float: left;
@@ -101,8 +103,8 @@
     position: absolute;
     left: 10%;
     top: 30%;
-    width: 40%;
-    height: 50%;
+    width: 35%;
+    height: 45%;
  }
   #Login-ul {
     position: absolute;

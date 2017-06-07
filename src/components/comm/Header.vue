@@ -27,6 +27,15 @@
     </ul>
   </div>
 
+  <div id="header-search">
+    <div id="header-search-input" contenteditable="true"></div>
+    <div id="header-search-btn" @mouseup="click(false)" @mousedown="click(true)">
+      <img src="../../assets/header/unclick.png" class="center" v-if="!searchState" />
+      <img src="../../assets/header/click.png" class="center" v-if="searchState" />
+    </div>
+  </div>
+
+
   <div id="header-user">
     <img src="../../assets/header/user.png" />
   </div>
@@ -40,6 +49,9 @@
     data() {
       return {
         show: false,
+
+        searchState: false,
+
         target: { name: '广州', id: 1 },
         citys: [
           {
@@ -74,6 +86,12 @@
       selectCity(city) {
         this.target = city;
         this.show = !this.show;
+
+      },
+
+      click(state) {
+        this.searchState = state;
+
       }
     }
   }
@@ -84,7 +102,10 @@
     position: relative;
     width: 94%;
     height: 8%;
-    min-height: 55px;
+
+
+    min-height: 74.86px;
+
     margin: 0;
     border-width: 0;
     padding: 0;
@@ -209,11 +230,61 @@
     right: 0;
     top: 50%;
     transform: translate(0, -50%);
+
+    cursor: pointer;
+
   }
 
   #header-user > img {
     width: 100%;
     height: 100%;
+  }
+
+
+  #header-search {
+    position: absolute;
+    right: calc(50px + 2%);
+    width: 21%;
+    height: 50px;
+    background-color: rgb(253, 161, 89);
+    border-radius: 5px;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+
+  #header-search > div {
+    display: inline-block;
+    position: absolute;
+    height: 70%;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+
+  #header-search-input {
+    width: 83%;
+    background-color: white;
+    left: 2%;
+    outline: none;
+    box-sizing: border-box;
+    padding: 4px 2px;
+    font-size: 23px;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  #header-search-btn {
+    width: 35px;
+    border-radius: 871px;
+    right: 2%;
+    overflow: hidden;
+    background-color: white;
+    cursor: pointer;
+  }
+
+  #header-search-btn > img {
+    position: absolute;
+    width: 35px;
+    height: 35px;
   }
 
   .header-city-down {

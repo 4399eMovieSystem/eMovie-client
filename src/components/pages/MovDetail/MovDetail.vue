@@ -84,15 +84,18 @@
         </table>
       </div>
     </div>
+
   </div>
 </template>
 
 <script>
   import { getData } from '../../../service/getData';
+
   export default {
     name: 'mov-detail',
     data() {
       return {
+
         movie_detail:null,
         play_cinemas:null,
         movie_id:2,
@@ -126,12 +129,14 @@
       },
       selectDate(detail) {
         this.selected_cinema_date_hells = detail.video_hell;
+
       }
     }
   }
 </script>
 
 <style>
+
   #main {
     margin-top: 3%;
     margin-left: 3%;

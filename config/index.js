@@ -4,6 +4,7 @@ var path = require('path')
 // 后台地址
 let baseUrl = 'http://172.18.68.62:3000'
 
+
 module.exports = {
   build: {
     env: require('./prod.env'),

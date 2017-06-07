@@ -84,7 +84,7 @@
     position: relative;
     width: 94%;
     height: 8%;
-    min-height: 55px;
+    min-height: 74.86px;
     margin: 0;
     border-width: 0;
     padding: 0;
@@ -209,6 +209,7 @@
     right: 0;
     top: 50%;
     transform: translate(0, -50%);
+    cursor: pointer;
   }
 
   #header-user > img {

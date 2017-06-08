@@ -13,10 +13,10 @@ import axios from 'axios'
  * @return {Json}
  */
 export const getData = ({ apiKey, params, data }) => {
-  // console.log(apiKey, params, data)
+   console.log(apiKey, params, data)
   let api = getAPI(apiKey, params);
+  console.log(api)
 	let url = api.url;
-
   if (api.mothod == 'GET') {
     let dataStr = '';
     Object.keys(data).forEach(key => {
@@ -48,6 +48,8 @@ export const getData = ({ apiKey, params, data }) => {
     },
     withCredentials: true
   }).then(res => {
+    console.log(res.url);
+    console.log(res.data);
     return res.data;
   })
 }

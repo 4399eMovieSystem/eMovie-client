@@ -57,7 +57,9 @@ const APIS = {
  * @return {Object}        [路由对象]
  */
 export const getAPI = (apiKey, opts = {}) => {
+  console.log(opts)
   let api = APIS[apiKey];
+  console.log(api)
   if (!api) return Error('关键码错误');
   Object.keys(opts).forEach(key =>{
     api.url = api.url.replace(':' + key, opts[key]);

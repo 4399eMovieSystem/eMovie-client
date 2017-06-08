@@ -39,24 +39,11 @@
   }
 
   #background-bg {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> dev
     min-width: 1054px;
     width: 100%; height: auto; min-height: 100%;
     background-image: url("../../assets/background/bg1.jpg");
     padding: 3rem 0;
     box-sizing: border-box;
-<<<<<<< HEAD
-=======
-=======
-    min-width: 1000px;
-    width: 100%;
-    height: 100%;
-    background-image: url("../../assets/background/bg1.jpg")
->>>>>>> dev
->>>>>>> dev
   }
 
   #background-content {

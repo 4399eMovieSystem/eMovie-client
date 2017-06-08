@@ -232,6 +232,7 @@
     margin-bottom: 30px;
     font-size: 12pt;
   }
+
   #Register_title {
     position: absolute;
     left: 49%;

@@ -1,131 +1,141 @@
 <template>
-  <div id = "main">
-    <div id = "movie-detail" v-if = "movie_detail">
-      <div id = "movietitle">
-        <h1 id = "htitle">
-          <span class = "title">{{ movie_detail.name }}</span>
+  <div id = "md_main">
+    <div id = "md_movie_detail" v-if = "movie_detail">
+
+      <div id = "md_div_movie_title">
+        <h1 id = "md_h_movie_title">
+          <span class = "md_title">{{ movie_detail.name }}</span>
         </h1>
       </div>
-      <div id = "detail"  class="main_content">
-        <div id = "divposter">
 
-          <img v-bind:src="movie_detail.imgUrl" id="imgMovie"/>
+      <div id = "md_detail"  class="md_movie_introduction">
+
+
+        <div id = "md_poster">
+          <img v-bind:src="movie_detail.imgUrl" id="md_movie_img"/>
         </div>
-        <div id = "content">
-          <div id = "left_detail">
-            <div class = "mov_detail left">
-              <span class="cat">首映：</span><span class="movie_data">{{ movie_detail.starttime.substr(0,10) }}</span>
+
+        <div id = "md_content">
+          <div id = "md_left_content">
+            <div class = "md_content_item">
+              <span class="md_content_item_key">首映：</span>
+              <span class="md_content_item_value">{{ movie_detail.starttime.substr(0,10) }}</span>
             </div>
-            <div class = "mov_detail left">
-              <span class="cat">类型：</span><span class="movie_data">{{ movie_detail.type }}</span>
+
+            <div class = "md_content_item">
+              <span class="md_content_item_key">类型：</span>
+              <span class="md_content_item_value">{{ movie_detail.type }}</span>
             </div>
-            <div class = "mov_detail left">
-              <span class="cat">地区：</span><span class="movie_data">{{ movie_detail.region }}</span>
-            </div>
-            
-          </div>
-          <div id = "right_detail">
-            <div class = "mov_detail right">
-              <span class = "cat">时长：</span><span class="movie_data">{{ movie_detail.length }}</span>
-            </div>
-            
-            <div class = "mov_detail right">
-              <span class = "cat">导演：</span>
-              <span class="movie_data" v-for="director in movie_detail.directors">{{ director.name }} </span>
-              
-            </div>
-            
-            <div class = "mov_detail right">
-              <span class = "cat">语言：</span><span class="movie_data">{{ movie_detail.language }}</span>
+
+            <div class = "md_content_item">
+              <span class="md_content_item_key">地区：</span>
+              <span class="md_content_item_value">{{ movie_detail.region }}</span>
             </div>
           </div>
+
+
+          <div id = "md_right_content">
+            <div class = "md_content_item">
+              <span class = "md_content_item_key">时长：</span>
+              <span class="md_content_item_value">{{ movie_detail.length }}</span>
+            </div>
             
-          <div class = "mov_demo" >
-            <span class = "cat">主演：</span>
-            <span class="movie_data" v-for="actor in movie_detail.actors">{{ actor.name }} </span>
-            <span></span>
+            <div class = "md_content_item">
+              <span class = "md_content_item_key">导演：</span>
+              <span class="md_content_item_value" v-for="director in movie_detail.directors">{{ director.name }} </span>
+            </div>
+            
+            <div class = "md_content_item">
+              <span class = "md_content_item_key">语言：</span>
+              <span class="md_content_item_value">{{ movie_detail.language }}</span>
+            </div>
           </div>
-          <div class = "mov_demo">
-            <span class = "cat">剧情简介：</span>
-            <span class="movie_data" >{{ movie_detail.description.replace(/\<.*?\>/g,'').replace(/\s+/g, "") }}</span>
+            
+          <div class="mov_brief_content" >
+            <span class="md_content_item_key">主演：</span>
+            <span class="md_content_item_value" v-for="actor in movie_detail.actors">{{ actor.name }} </span>
           </div>
+
+          <div class="mov_brief_content">
+            <span class="md_content_item_key">剧情简介：</span>
+            <span class="md_content_item_value" >{{ movie_detail.description.replace(/\<.*?\>/g,'').replace(/\s+/g, "") }}</span>
+          </div>
+
         </div>
+
+
       </div>
     </div>
-
     <div v-else>
       该影片不存在
     </div>
 
-
-    <div id = "cinema"  v-if="selected_cinema">
-      <h2 class="divtitle">
-        <span class="title">上映影院</span>
+    <div id = "md_cinema"  v-if="selected_cinema">
+      <h2 class="md_cinema_title">
+        <span class="md_title">上映影院</span>
       </h2>
-      <ul id = "cinemas_list" class="main_content">
-        <li class = "cinema_list" v-for="play_cinema in play_cinemas" @click="selectCinema(play_cinema)" v-bind:class="{active:play_cinema==selected_cinema}">{{ play_cinema.name }}</li>
+      <ul id = "md_cinemas_list" class="md_emphasis_content">
+        <li class = "md_cinema_list" v-for="play_cinema in play_cinemas" @click="selectCinema(play_cinema)" v-bind:class="{md_active:play_cinema==selected_cinema}">{{ play_cinema.name }}</li>
       </ul>
-      <div id="address">影院地址： {{ selected_cinema.address }}</div>
+      <div id="md_address">影院地址： {{ selected_cinema.address }}</div>
     </div>
 
-    <div id = "showing">
-      <div id="time" v-if="selected_cinema" >
+
+    <div id = "md_screenings">
+
+      <div id="md_play_date" v-if="selected_cinema" >
         <h2> 
-          <span class = "title">观影时间</span>
+          <span class = "md_title">观影时间</span>
           <span v-for="single_detail in selected_cinema.detail"  
               @click="selectDate(single_detail)" 
-              class="date" 
+              class="md_span_play_date" 
               v-bind:class="{
-                bgimg1: selected_cinema.detail.indexOf(single_detail)%3==0,
-                bgimg2: selected_cinema.detail.indexOf(single_detail)%3==1,
-                bgimg3: selected_cinema.detail.indexOf(single_detail)%3==2,
+                md_bgimg1: selected_cinema.detail.indexOf(single_detail)%3==0,
+                md_bgimg2: selected_cinema.detail.indexOf(single_detail)%3==1,
+                md_bgimg3: selected_cinema.detail.indexOf(single_detail)%3==2,
               }">
             {{ single_detail.date }}
           </span>
         </h2>
       </div>
-      <div id="play_detail" v-if="selected_cinema_date_hells">
 
-        <div id = "Screenings">
+      <div id="md_play_detail" v-if="selected_cinema_date_hells">
+        <div id = "md_screenings_content">
 
-          <div id="s_time" class=" s_title main_content gap">
-            <span class="s_time s_info">放映时间</span>
-            <div class="s_info" v-for="screening in selected_cinema_date_hells">  
-              <span class="s_start">{{ screening.starttime }}</span>
+          <div id="md_screenings_time" class="md_screenings_content_title md_emphasis_content md_devide_line">
+            <span class="md_play_time md_screenings_info">放映时间</span>
+            <div class="md_screenings_info" v-for="screening in selected_cinema_date_hells">  
+              <span class="md_start">{{ screening.starttime }}</span>
               -
-              <span class="s_end"></span>{{ screening.endtime }}</span>
-            </div>
-            
-          </div>
-
-          
-
-
-          <div id="version" class="s_title main_content gap">
-            <span class="version s_info">语言版本</span>
-            <div class="s_info" v-for="screening in selected_cinema_date_hells">
-              <span class="version">{{ movie_detail.language }}</span>
+              <span class="md_end"></span>{{ screening.endtime }}</span>
             </div>
           </div>
 
-          <div id="hell" class="s_title main_content gap">
-            <span class="hell s_info">放映厅</span>
+          <div id="md_language_version" class="md_screenings_content_title md_emphasis_content md_devide_line">
+            <span class="md_version md_screenings_info">语言版本</span>
+            <div class="md_screenings_info" v-for="screening in selected_cinema_date_hells">
+              <span class="md_version">{{ movie_detail.language }}</span>
+            </div>
+          </div>
+
+          <div id="md_hell" class="md_screenings_content_title md_emphasis_content md_devide_line">
+            <span class="md_hell md_screenings_info">放映厅</span>
             <div v-for="screening in selected_cinema_date_hells">
-              <span class="hell s_info">{{ screening.name }}</span>
+              <span class="md_hell md_screenings_info">{{ screening.name }}</span>
             </div>
           </div>
 
-          <div id="price" class="s_title main_content gap">
-            <span class="price s_info">在线售价</span>
+          <div id="price" class="md_screenings_content_title md_emphasis_content md_devide_line">
+            <span class="md_price md_screenings_info">在线售价</span>
             <div v-for="screening in selected_cinema_date_hells">
-              <span class="hell s_info s_price">{{ screening.price }}</span>
+              <span class="md_screenings_info md_price">{{ screening.price }}</span>
             </div>
           </div>
 
-          <div id="selectSeat" class="s_title main_content">
-            <span class="selectSeat s_info" >在线选座</span>
+          <div id="md_selectSeat" class="md_screenings_content_title md_emphasis_content">
+            <span class="md_selectSeat md_screenings_info" >在线选座</span>
             <div v-for="screening in selected_cinema_date_hells">
-              <span class="selectSeat s_info"><router-link :to="{ name: 'TicketBook' }" class="link-def"  v-on:click="storeIndex(selected_cinema_date_hells.indexOf(screening))"> 选座购票</router-link></span>
+              <span class="md_selectSeat md_screenings_info"><router-link :to="{ name: 'TicketBook' }" class="md_link-def"  v-on:click="storeIndex(selected_cinema_date_hells.indexOf(screening))"> 选座购票</router-link></span>
             </div>
           </div>
 
@@ -143,7 +153,6 @@
     name: 'mov-detail',
     data() {
       return {
-
         movie_detail:null,
         play_cinemas:null,
         movie_id:2,
@@ -176,7 +185,6 @@
           .catch(err => {
             console.log('cin_mov err', err);
           })
-      
     },
     methods: {
       selectCinema(play_cinema) {
@@ -194,7 +202,6 @@
       },
       storeIndex: function(index) {
         localStorage.setItem('index of cinema_date_hell',index);
-       
       }
     }
   }
@@ -202,7 +209,7 @@
 
 <style>
 
-  #main {
+  #md_main {
     margin-top: 2%;
     margin-bottom: 2%;
     margin-left: 6%;
@@ -210,67 +217,67 @@
     height: 96%;
   }
 
-  #movie_detail {
+  #md_movie_detail {
     height: 40%;
   }
 
-  #cinema {
+  #md_cinema {
     top: 40%;
     height: 30%;
     padding-top:2%; 
     clear: both;
   }
 
-  #showing {
+  #md_screenings {
     height: 30%;
   }
 
-  #movie_title {
+  #md_movie_title {
     height: 5%;
   }
 
-  #detail {
+  #md_detail {
     overflow: hidden;
   }
 
-  #divposter {
+  #md_poster {
     width: 34%;
     height: 35%;
     float: left;
   }
 
-  #content {
+  #md_content {
     width: 66%;
     height: 35%;
     float: right;
   }
 
-  #left_detail {
+  #md_left_content {
     margin-left: 1%;
     height: 50%;
     width: 49%;
     float: left;
   }
 
-  #right_detail {
+  #md_right_content {
     margin-left: 1%;
     width: 49%;
     height: 50%;
     float: right;
   }
 
-  .mov_detail {
+  .md_content_item {
     margin-bottom: 1%;
   }
 
-  .mov_demo{
+  .mov_brief_content {
     margin-left: 1%;
     margin-bottom: 1%;
     clear: both;
     line-height: 120%;
   }
 
-  .cinema_list {
+  .md_cinema_list {
     font-size: 15pt;
     display: inline-block;
     padding: 0.5%;
@@ -278,66 +285,66 @@
     color:rgb(177,109,108);
   }
 
-  .cat {
+  .md_content_item_key {
     font-size: 15pt;
     color:gray; 
   }
 
-  .movie_data {
+  .md_content_item_value {
     font-size: 15pt;
     font-weight: 600;
     color: #333333;
   }
 
-  .divtitle {
+  .md_cinema_title {
     top:2%;
   }
 
-  .title {
+  .md_title {
     color:rgb(170,140,105);
     border-bottom: 0.1vw dotted grey;
   }
 
-  .active {
+  .md_active {
     background-color: rgb(197,129,128);
   }
 
-  #time {
+  #md_play_date {
     margin-top:3%;
     margin-bottom: 0.5%; 
   }
 
-  #play_detail {
+  #md_play_detail {
     height: 90%;
     margin-bottom: 2%;
   }
 
-  #imgMovie {
-
+  #md_movie_img {
     max-width:100%;
     max-height:100%;
   }
 
+  #md_address {
+    color: gold;
+  }
 
-
-  .main_content{
+  .md_emphasis_content{
     background-color: #E6E6FA;
   }
 
-  #Screenings {
+  #md_screenings_content {
     overflow: hidden;
   }
 
-  .s_info {
+  .md_screenings_info {
     text-align: center;
   }
 
-  .s_start, .s_price {
+  .md_start, .md_price {
     color: orange;
   }
 
-  .date {
-    
+  .md_span_play_date {
     padding-left: 1%;
     padding-right: 1%;
     cursor: pointer;
@@ -346,7 +353,7 @@
 
 
 
-  .s_title {
+  .md_screenings_content_title {
     padding-left: 3%;
     padding-right: 3%;
     float: left;
@@ -355,28 +362,27 @@
     line-height: 200%;
   }
 
-  .gap {
+  .md_devide_line {
     background-image: url("../../../assets/info_gap/gap.png");
     background-repeat: no-repeat;
     background-size: 10px 100%;
     background-position: 100%;
   }
 
-  .bgimg1 {
+  .md_bgimg1 {
     background-image: url("../../../assets/play_time/time1.png");
   }
 
-  .bgimg2 {
+  .md_bgimg2 {
     background-image: url("../../../assets/play_time/time2.png");
   }
 
-  .bgimg3 {
+  .md_bgimg3 {
     background-image: url("../../../assets/play_time/time3.png");
   }
 
-  .link-def {
+  .md_link-def {
     text-decoration: none;
-    
     font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
     color: orange;
   }

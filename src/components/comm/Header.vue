@@ -94,7 +94,10 @@
         this.target = city;
         this.show = !this.show;
       },
-
+      isLogin(item) {
+        if (item == 'Login')
+          this.$router.push({ name: 'LoginRegister'});
+      },
       click(state) {
         this.searchState = state;
       }

@@ -233,6 +233,7 @@
     position: absolute;
     right: calc(50px + 2%);
     width: 21%;
+    min-width: 279px;
     height: 50px;
     background-color: rgb(253, 161, 89);
     border-radius: 5px;

@@ -232,13 +232,7 @@
     margin-bottom: 30px;
     font-size: 12pt;
   }
-  .ErrorStyle {
-    background-image: url('../../../assets/background/warn.png');
-    background-repeat: no-repeat;
-    background-position: 0px 0px;
-    background-size: 30px 30px;
-    padding-left: 35px;
-  }
+
   #Register_title {
     position: absolute;
     left: 49%;

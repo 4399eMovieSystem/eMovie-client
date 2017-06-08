@@ -167,6 +167,8 @@
             console.log(this.play_cinemas)
             this.selected_cinema_date_hells = this.selected_cinema.detail[0].video_hell;
             this.date = this.selected_cinema.detail[0].date;
+
+            //当地缓存
             localStorage.setItem('play_cinema', JSON.stringify(this.selected_cinema));
             localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
             localStorage.setItem('date',this.date);

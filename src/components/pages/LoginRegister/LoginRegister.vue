@@ -135,9 +135,6 @@
 </script>
 
 <style>
-  html,body {
-    font-family: Georgia, Garamond, serif;
-  }
   input {
     background-color: #DDDBDB;
     border: none;

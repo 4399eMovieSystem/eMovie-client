@@ -35,6 +35,7 @@
     </div>
   </div>
 
+
   <div id="header-user">
     <img src="../../assets/header/user.png" />
   </div>
@@ -48,7 +49,9 @@
     data() {
       return {
         show: false,
+
         searchState: false,
+
         target: { name: '广州', id: 1 },
         citys: [
           {
@@ -97,7 +100,10 @@
     position: relative;
     width: 94%;
     height: 8%;
+
+
     min-height: 74.86px;
+
     margin: 0;
     border-width: 0;
     padding: 0;
@@ -221,7 +227,9 @@
     right: 0;
     top: 50%;
     transform: translate(0, -50%);
+
     cursor: pointer;
+
   }
 
   #header-user > img {
@@ -233,7 +241,6 @@
     position: absolute;
     right: calc(50px + 2%);
     width: 21%;
-    min-width: 279px;
     height: 50px;
     background-color: rgb(253, 161, 89);
     border-radius: 5px;
@@ -262,7 +269,7 @@
     font-size: 23px;
     border-radius: 3px;
     overflow: hidden;
-    border-radius: 0 0 0 20px;
+    border-radius: 20px 0 0 20px;
   }
 
   #header-search-input:empty:before {

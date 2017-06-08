@@ -118,7 +118,7 @@
           <div id="price" class="s_title main_content gap">
             <span class="price s_info">在线售价</span>
             <div v-for="screening in selected_cinema_date_hells">
-              <span class="hell s_info s_price" >{{ screening.price }}</span>
+              <span class="hell s_info s_price">{{ screening.price }}</span>
             </div>
           </div>
 
@@ -182,6 +182,7 @@
       selectCinema(play_cinema) {
         this.selected_cinema = play_cinema;
         this.selected_cinema_date_hells = this.selected_cinema.detail[0].video_hell;
+
         localStorage.setItem('play_cinema', JSON.stringify(this.selected_cinema));
         localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
       },
@@ -193,6 +194,7 @@
       },
       storeIndex: function(index) {
         localStorage.setItem('index of cinema_date_hell',index);
+       
       }
     }
   }

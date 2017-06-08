@@ -265,7 +265,7 @@
   #header-search-input {
     width: 83%;
     background-color: white;
-    left: 2%;
+    left: 1%;
     outline: none;
     box-sizing: border-box;
     padding: 4px 8px;
@@ -283,7 +283,7 @@
   #header-search-btn {
     width: 35px;
     border-radius: 0 35px 35px 0;
-    left: 83%;
+    left: 82%;
     overflow: hidden;
     background-color: white;
     cursor: pointer;

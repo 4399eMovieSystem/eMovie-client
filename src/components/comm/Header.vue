@@ -1,7 +1,7 @@
 <template>
 <div id="header">
   <div id="header-logo">
-    <img src="../../assets/header/logo.png" />
+    <img src="../../assets/header/logo.png" class="center" />
   </div>
 
   <div id="header-city">
@@ -28,7 +28,7 @@
   </div>
 
   <div id="header-search">
-    <div id="header-search-input" contenteditable="true"></div>
+    <div id="header-search-input" contenteditable="true" placeholder="请输入影片名"></div>
     <div id="header-search-btn" @mouseup="click(false)" @mousedown="click(true)">
       <img src="../../assets/header/unclick.png" class="center" v-if="!searchState" />
       <img src="../../assets/header/click.png" class="center" v-if="searchState" />
@@ -118,20 +118,19 @@
   }
 
   #header-logo {
-    position: relative;
-    width: 20%;
+    position: absolute;
+    width: 18%;
     height: 100%;
   }
 
   #header-logo > img {
-    float: right;
-    width: 95%;
-    height: 100%;
+    width: 108%;
+    max-height: 100%;
   }
 
   #header-city {
-    position: relative;
-    left: -3%;
+    position: absolute;
+    left: 18%;
     width: 8%;
     height: 100%;
   }
@@ -218,14 +217,14 @@
 
   .header-link-def {
     text-decoration: none;
-    font-size: 45px;
+    font-size: 2rem;
     font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
     color: grey;
   }
 
   #header-user {
-    width: 50px;
-    height: 50px;
+    width: 42px;
+    height: 42px;
     position: absolute;
     right: 0;
     top: 50%;
@@ -250,6 +249,8 @@
     border-radius: 5px;
     top: 50%;
     transform: translate(0, -50%);
+    border-radius: 0 38px 10px 20px;
+    overflow: hidden;
   }
 
   #header-search > div {
@@ -258,6 +259,7 @@
     height: 70%;
     top: 50%;
     transform: translate(0, -50%);
+    margin: 0;
   }
 
   #header-search-input {
@@ -266,16 +268,22 @@
     left: 2%;
     outline: none;
     box-sizing: border-box;
-    padding: 4px 2px;
+    padding: 4px 8px;
     font-size: 23px;
     border-radius: 3px;
     overflow: hidden;
+    border-radius: 0 0 0 20px;
+  }
+
+  #header-search-input:empty:before {
+    content: attr(placeholder);
+    color: rgba(0, 0, 0, 0.3);
   }
 
   #header-search-btn {
     width: 35px;
-    border-radius: 871px;
-    right: 2%;
+    border-radius: 0 35px 35px 0;
+    left: 83%;
     overflow: hidden;
     background-color: white;
     cursor: pointer;

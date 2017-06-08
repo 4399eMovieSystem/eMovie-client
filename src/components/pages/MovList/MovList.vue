@@ -113,7 +113,7 @@
       return {
         title1: '正在热映',
         title2: '即将上映',
-        title3: '今日榜单',
+        title3: '电影排行榜',
         movie_list:null
       }
     },

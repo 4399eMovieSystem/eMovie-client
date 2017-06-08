@@ -36,7 +36,12 @@
   </div>
 
   <div id="header-user">
-    <img src="../../assets/header/user.png" />
+    <img src="../../assets/header/user.png" @click="tologin = !tologin" />
+    <div id="header-user-list" :class="{'header-show': tologin, 'header-hide': !tologin}">
+      <ul>
+        <li v-for="item in items" @click="isLogin(item)">{{item}}</li>
+      </ul>
+    </div>
   </div>
 </div>
 </template>
@@ -47,6 +52,7 @@
 
     data() {
       return {
+        tologin: false,
         show: false,
         searchState: false,
         target: { name: '广州', id: 1 },
@@ -75,6 +81,10 @@
             name: '北京',
             id: 6
           }
+        ],
+        items: [
+          'Login',
+          'Logout'
         ]
       }
     },
@@ -228,7 +238,20 @@
     width: 100%;
     height: 100%;
   }
-
+  #header-user-list {
+    position: absolute;
+    width: 80px;
+    height: 180%;
+    background: rgba(244, 255, 255, 0.8);
+    left: 13%;
+    top: 100%;
+    overflow: hidden;  
+    border: 1px solid #ccc;
+  }
+  #header-user-list ul {
+    padding-left: 0px;
+    text-align: center;
+  }
   #header-search {
     position: absolute;
     right: calc(50px + 2%);

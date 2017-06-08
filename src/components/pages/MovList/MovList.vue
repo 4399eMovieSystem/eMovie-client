@@ -57,7 +57,7 @@
               </div>
           </router-link>
           <div id="ticket1">
-            <h class="rank_font">{{movie_list.rank[4].grade}}</h>
+            <h class="rank_font">{{movie_list.rank[0].grade}}</h>
           </div>
         </li>
         <li>
@@ -67,7 +67,7 @@
               </div>
           </router-link>
           <div id="ticket2">
-            <h class="rank_font">{{movie_list.rank[4].grade}}</h>
+            <h class="rank_font">{{movie_list.rank[1].grade}}</h>
           </div>
         </li>
         <li>
@@ -77,7 +77,7 @@
               </div>
           </router-link>
           <div id="ticket3">
-            <h class="rank_font">{{movie_list.rank[4].grade}}</h>
+            <h class="rank_font">{{movie_list.rank[2].grade}}</h>
           </div>
         </li>
         <li>
@@ -87,7 +87,7 @@
               </div>
           </router-link>
           <div id="ticket4">
-            <h class="rank_font">{{movie_list.rank[4].grade}}</h>
+            <h class="rank_font">{{movie_list.rank[3].grade}}</h>
           </div>
         </li>
         <li>

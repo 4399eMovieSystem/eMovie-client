@@ -139,7 +139,6 @@
     width: 100%;
     height: 100%;
       font-family: Georgia, Garamond, serif;
-    color: white;
   }
   input {
     background-color: #DDDBDB;

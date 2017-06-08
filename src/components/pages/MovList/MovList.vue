@@ -57,7 +57,7 @@
               </div>
           </router-link>
           <div id="ticket1">
-            <span class="rank_font">2500万</span>
+            <h class="rank_font">{{movie_list.rank[4].grade}}</h>
           </div>
         </li>
         <li>
@@ -67,7 +67,7 @@
               </div>
           </router-link>
           <div id="ticket2">
-            <span class="rank_font">2500万</span>
+            <h class="rank_font">{{movie_list.rank[4].grade}}</h>
           </div>
         </li>
         <li>
@@ -77,7 +77,7 @@
               </div>
           </router-link>
           <div id="ticket3">
-            <span class="rank_font">2500万</span>
+            <h class="rank_font">{{movie_list.rank[4].grade}}</h>
           </div>
         </li>
         <li>
@@ -87,7 +87,7 @@
               </div>
           </router-link>
           <div id="ticket4">
-            <span class="rank_font">2500万</span>
+            <h class="rank_font">{{movie_list.rank[4].grade}}</h>
           </div>
         </li>
         <li>
@@ -97,7 +97,7 @@
               </div>
           </router-link>
           <div id="ticket5">
-            <span class="rank_font">2500万</span>
+            <h class="rank_font">{{movie_list.rank[4].grade}}</h>
           </div>
         </li>
       </ul>
@@ -113,17 +113,16 @@
       return {
         title1: '正在热映',
         title2: '即将上映',
-        title3: '今日票房',
-        movie_detail: null
+        title3: '今日榜单',
+        movie_list:null
       }
     },
     mounted:function() {
           this.movie_id = this.$route.path.substr(9);
-          getData({ apiKey: 'mov_info', params: { mov_id: 1 } })
+          getData({ apiKey: 'mov_list'  })
           .then(response => {
-            console.log(response.data);
-            this.movie_detail = response.data;
-          })
+            this.movie_list = response.data;
+                     })
           .catch(err => {
             console.log('cin_mov err', err);
           })

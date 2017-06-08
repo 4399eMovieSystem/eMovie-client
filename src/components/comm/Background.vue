@@ -1,6 +1,6 @@
 <template>
   <div id="background-bg" class="background-bg">
-    <div id="background-content" class="background-bg center">
+    <div id="background-content" class="background-bg">
       <v-header></v-header>
       <router-view></router-view>
     </div>
@@ -33,24 +33,34 @@
   }
 
   .background-bg {
-    margin: 0;
-    border: 0;
-    position: absolute;
+    margin: 0; border: 0;
+    position: relative;
+    background-repeat: repeat;
   }
 
   #background-bg {
+<<<<<<< HEAD
+    min-width: 1054px;
+    width: 100%; height: auto; min-height: 100%;
+    background-image: url("../../assets/background/bg1.jpg");
+    padding: 3rem 0;
+    box-sizing: border-box;
+=======
     min-width: 1000px;
     width: 100%;
     height: 100%;
     background-image: url("../../assets/background/bg1.jpg")
+>>>>>>> dev
   }
 
   #background-content {
-    width: 92%;
-    height: 92%;
+    width: 93vw;
+    height: 90vh; height:auto; min-height: 90vh;
     border-radius: 10px;
     background-image: url("../../assets/background/bg3.jpg");
     box-shadow: 20px 20px 30px 10px rgba(0, 0, 0, 0.4);
+    left: 50%;
+    transform: translate(-50%, 0);
   }
 
   .center {
@@ -60,10 +70,11 @@
   }
 
   #background-flower {
-    width: 6%;
-    height: 20%;
-    right: 25px;
-    bottom: 10px;
+    width: 9rem;
+    height: 13rem;
+    position: absolute;
+    right: 0;
+    bottom: 0;
   }
 
   #background-flower > img {

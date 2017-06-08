@@ -118,14 +118,14 @@
           <div id="price" class="s_title main_content gap">
             <span class="price s_info">在线售价</span>
             <div v-for="screening in selected_cinema_date_hells">
-              <span class="hell s_info s_price">{{ screening.price }}</span>
+              <span class="hell s_info s_price" >{{ screening.price }}</span>
             </div>
           </div>
 
           <div id="selectSeat" class="s_title main_content">
-            <span class="selectSeat s_info">在线选座</span>
+            <span class="selectSeat s_info" >在线选座</span>
             <div v-for="screening in selected_cinema_date_hells">
-              <span class="selectSeat s_info"><router-link :to="{ name: 'TicketBook' }" class="link-def" >选座购票</router-link></span>
+              <span class="selectSeat s_info"><router-link :to="{ name: 'TicketBook' }" class="link-def"  v-on:click="storeIndex(selected_cinema_date_hells.indexOf(screening))"> 选座购票</router-link></span>
             </div>
           </div>
 
@@ -148,7 +148,8 @@
         play_cinemas:null,
         movie_id:2,
         selected_cinema:null,
-        selected_cinema_date_hells:null
+        selected_cinema_date_hells:null,
+        date:null
       }
     },
     mounted:function() {
@@ -165,6 +166,10 @@
             console.log(this.selected_cinema)
             console.log(this.play_cinemas)
             this.selected_cinema_date_hells = this.selected_cinema.detail[0].video_hell;
+            this.date = this.selected_cinema.detail[0].date;
+            localStorage.setItem('play_cinema', JSON.stringify(this.selected_cinema));
+            localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
+            localStorage.setItem('date',this.date);
           })
           .catch(err => {
             console.log('cin_mov err', err);
@@ -175,13 +180,17 @@
       selectCinema(play_cinema) {
         this.selected_cinema = play_cinema;
         this.selected_cinema_date_hells = this.selected_cinema.detail[0].video_hell;
-       
+        localStorage.setItem('play_cinema', JSON.stringify(this.selected_cinema));
+        localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
       },
       selectDate(detail) {
         this.selected_cinema_date_hells = detail.video_hell;
+        this.date = detail.date;
+        localStorage.setItem('date',this.date);
+        localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
       },
-      click: function(event) {
-        event.target.style.cursor = "pointer"; 
+      storeIndex: function(index) {
+        localStorage.setItem('index of cinema_date_hell',index);
       }
     }
   }

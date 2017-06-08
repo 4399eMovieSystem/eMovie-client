@@ -8,7 +8,7 @@
       <ul id="Login_ul">
         <input id="Login_phone" type="text" title="手机号码" placeholder="手机号码">
         <input id="Login_password" type="password" title="密码" placeholder="请输入密码">
-        <button @click="login1()" class="LoginRegister_button">登录</button>
+        <button @click="login1()" id="Login_lbutton" class="LoginRegister_button">登录</button>
         <button @click="changed()" class="LoginRegister_button">注册</button>
       </ul>
     </div>
@@ -48,7 +48,7 @@
         Info: '',
         Time: 5,
         scend60: '获取验证码',
-        phoneError: '1',
+        phoneError: '',
         codeError: '',
         passwordError: '',
         password2Error: '',
@@ -157,6 +157,7 @@
 
     font-family: Georgia, Garamond, serif;
     color: white;
+    font-size: 12pt;
 
     margin-right: 50px;
   }
@@ -173,18 +174,21 @@
     width: 30%;
     height: 40%;
  }
+ #Login_lbutton {
+    background-color: rgb(198,153,109);
+ }
   #Login_ul {
     display: inline-block;
     position: absolute;
-    left: 60%;
+    left: 50%;
     top: 40%;
 
   }
   #Login_title {
-    font-size: 18pt;
+    font-size: 24pt;
 
     position: absolute;
-    left: 63%;
+    left: 53%;
     top: 30%;
     color: rgb(175,140,110);
   }
@@ -237,7 +241,7 @@
   }
   #Register_title {
     position: absolute;
-    left: 53%;
+    left: 49%;
      font-size: 18pt;
     top: 22%;
     color: rgb(175,140,110);

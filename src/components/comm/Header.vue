@@ -281,12 +281,13 @@
     height: 100%;
   }
   #header-user-list {
-    position: absolute;
+    position: relative;
     width: 80px;
     height: 180%;
     background: rgba(244, 255, 255, 0.8);
-    left: 0%;
-    top: 100%;
+    left: -45%;
+    margin-right: 0px;
+
     overflow: hidden;  
     border: 1px solid #ccc;
     cursor: pointer;
@@ -305,6 +306,9 @@
 
     line-height: 40px;
     height: 40px;
+  }
+  #header-user-list li:hover {
+    background-color: rgba(96, 96, 96, 0.2);
   }
   #header-search {
     position: absolute;

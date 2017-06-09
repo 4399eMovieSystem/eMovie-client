@@ -65,7 +65,6 @@
       login1() {
         getData({ apiKey: 'login', data: { phone: Login_phone.value, password:  Login_password.value} })
           .then(data => {
-            console.log(data);
             if (data.status == 'OK') {
               this.$router.push({ name: 'Home'});
             } else {
@@ -80,7 +79,6 @@
       register1() {
         getData({ apiKey: 'register', data: { phone: Register_phone.value, password:  Register_password.value, password1: Register_password2.value, code: Register_code.value} })
           .then(data => {
-            console.log(data);
             if (data.status == 'OK') {
               Time = 5;
               var Interval = setInterval(function() {
@@ -108,7 +106,7 @@
       register_sms() {
         getData({ apiKey: 'register_sms', data: { phone: Register_phone.value }})
           .then(data => {
-            console.log(data);
+
             if (data.status == 'OK') {
               Time = 60;
               this.codeError = '';

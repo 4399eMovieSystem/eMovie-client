@@ -13,6 +13,11 @@ const APIS = {
     url: '/api/movies/:mov_id/cinemas',
     method: 'GET'
   },
+  //获取某个影院的具体信息
+  cin_info: {
+    url: '/api/cinemas/:cin_id',
+    method: 'GET'
+  },
   // 获取具体某部电影的信息
   mov_info: {
     url: '/api/movies/:mov_id',

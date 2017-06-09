@@ -10,15 +10,20 @@
             <div id="row_one">
                 <div class="info">观影时间</div>
                 <div class="info">影片</div>
+                <div class="info"></div>
                 <div class="info">座位</div>
             </div>
             <div id="row_two">
                 <div>{{pd_time}}</div>
                 <div>{{pd_mov}}</div>
-                <div>{{pd_seat}}</div>
+                <div>{{pd_mov_cinema}}</div>
+                <div>
+                    <span class="pd_seat" v-for="seat in pd_seat" v-if="pd_loop_flag">{{seat}}</span>
+                    <span class="pd_seat" v-if="!pd_loop_flag">{{String(pd_seat)}}</span>
+                </div>
             </div>
         </div>
-        <div class="info">应付总额：<span id="total_price">{{pd_total_price}}</span></div>
+        <div class="info">应付总额：<span id="total_price"><span>￥</span>{{pd_total_price}}</span></div>
         <div id="pay_info">
             <div class="pay_info_row">
                 <div class="info">支付账号</div>
@@ -33,7 +38,7 @@
             <img src="../../../assets/paydetail/感叹号.png">
             <div>输入的账户或密码错误</div>
         </div>
-        <div id="pay" @click='pay'><img src="../../../assets/paydetail/付款.png"></div>
+        <img id="pay" @click='pay' src="../../../assets/paydetail/付款.png">
 </div>
 </div>
 </template>
@@ -44,29 +49,62 @@ import { getData } from '../../../service/getData';
     name: 'pay-detail',
     data() {
       return {
-        pd_time: 'pd_time',
-        pd_seat: 'pd_seat',
-        pd_mov: 'pd_mov',
-        pd_total_price: 'pd_total_price',
+        pd_mov_id: null,
+        pd_mov_cinema: null,
+        pd_time: null,
+        pd_seat: null,
+        pd_mov: null,
+        pd_total_price: null,
+        pd_tickets_id: null,
         pd_account: '',
         pd_password: '',
-        hint_bool: 0,
+        pd_loop_flag: null,
+        hint_bool: false,
       }
+    },
+    created: function(){
+        this.pd_time = this.$route.query.pd_time;
+        this.pd_seat = this.$route.query.pd_seat;
+        if(this.pd_seat.length > 1) {
+            this.pd_loop_flag = true;
+        } else {
+            this.pd_loop_flag = false;
+        }
+        this.pd_mov = this.$route.query.pd_mov;
+        this.pd_total_price = this.$route.query.pd_total_price;
+        this.pd_tickets_id = this.$route.query.ticks_id;
+        this.pd_mov_id = this.$route.query.pd_mov_id;
+        this.pd_mov_cinema = this.$route.query.pd_mov_cinema;
     },
   methods: {
       pay() {
-        getData({ apiKey: 'pay', data: {tcks_id: this.pd_tickets_id, pay_num: this.pd_account, pay_pwd: this.pd_password, price: this.pd_total_price}})
-        .then(data => {
-          console.log(data)
-          if(data.status == 'OK') {
-            alert("您已成功购票！");
-          } else {
-            alert("支付账号或密码错误！");
+        // console.log(this.pd_tickets_id);
+        // console.log(this.pd_account);
+        // console.log(this.pd_password);
+        // console.log(this.pd_total_price);
+        if(this.pd_account.length < 6 || this.pd_password.length < 6) {
+            this.hint_bool = true;
+        } else {
+            this.hint_bool = false;
+            getData({ apiKey: 'pay', params: {mov_id: this.pd_mov_id},data: {tcks_id: this.pd_tickets_id, pay_num: this.pd_account, pay_pwd: this.pd_password, price: this.pd_total_price}})
+            .then(data => {
+            if(data.status == 'OK') {
+                alert("您已成功购票！");
+            } else {
+                alert("支付账号或密码错误！");
+            }
+            })
+            .catch(err => {
+            console.log(err);
+            alert("Error");
+            });
+        }
+        
+      },
+      seats_font_size_change() {
+          if(this.$route.query.pd_seat.length > 3) {
+
           }
-        })
-        .catch(err => {
-          console.log(err);
-        })
       }
     }
   }
@@ -74,7 +112,7 @@ import { getData } from '../../../service/getData';
 
 <style>
 #my_body {
-  height: 65vw;
+  height: 40vw;
 }
 #B1 {
     margin-left: 10%;
@@ -91,57 +129,65 @@ import { getData } from '../../../service/getData';
 
 #B1 div {
     color: rgb(175,140,110);
-    font-size: 130%;
+    font-size: 2vw;
     float: left;
 }
 
 #B1 div span {
-    font-size: 140%;
+    font-size: 2.3vw;
+    color: rgb(175,140,110);
 }
 
 #B2 {
-    margin-top: 1.5vw;
+    margin-top: 1.2vw;
     height: 90%;
     width: 70%;
     padding-left: 15vw;
 }
 
 #B2 div{
-    margin-bottom: 1.25vw;
+    margin-bottom: 1vw;
 }
 #cheak {
-    font-size: 130%;
-}
-
-#table div {
-    height: 10vh;
-    background-position:center;
-    background-repeat: no-repeat;
+    font-size: 1.8vw;
 }
 
 #table div div {
-    line-height: 300%;
     text-align: center;
-    width: 33%;
+    width: 25%;
     float: left;
+    font-size: 1.5vw;
 }
 
 #row_one {
+    height: 7vh;
+    background-position:center;
     background-image:url("../../../assets/paydetail/支付信息.jpg");
 }
 
+#row_one div {
+    line-height: 3.5vw;
+    height: 100%;
+}
 #row_two {
     margin-top: -0.75vw;
+    height: 10vh;
+    background-position:center;
     background-image:url("../../../assets/paydetail/支付页面电影信息.jpg");
 }
 
-#total_price {
-    font-size: 150%;
+#row_two div {
+    line-height: 3.5vw;
+    font-weight: bold;
+    height: 100%;
+}
+#total_price, #total_price span {
+    font-size: 2vw;
     color: red;
 }
 
 .pay_info_row input{
-    height: 30%;
+    height: 60%;
     margin-top: 1vw;
     margin-left: 1vw;
     width: 50%;
@@ -187,13 +233,19 @@ import { getData } from '../../../service/getData';
 #pay {
     position: absolute;
     zoom: 50%;
-    width: 10%;
-    height: 10%;
-    left: 41%;
+    left: 37%;
+    margin-top: 2%;
     cursor: pointer;
 }
 
 .info {
     color: rgb(90,90,90);
+    font-size: 1.3vw;
+}
+
+.pd_seat {
+    width: 33%;
+    height: 30%;
+    float: left;
 }
 </style>

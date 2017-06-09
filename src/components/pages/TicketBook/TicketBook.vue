@@ -22,6 +22,7 @@
         <div id="hall">
             <div id="screen">银幕</div>
             <div id="num_list">
+                <div class="div_num_empty"></div>
                 <div class="div_num" v-for="temp in tb_num_list">{{temp}}</div>
             </div>
             <div id="seat_list">
@@ -70,8 +71,9 @@
             <span id="tb_total_price_value"><span>￥</span>{{tb_total_price_value}}</span>
         </div>
         <div id="submit" @click="submit">
-            <router-link :to="{ name: 'PayDetail' }" v-if='tb_jump'></router-link>
+            
             <img src="../../../assets/paydetail/提交订单.png">
+            
         </div>
     </div>
   </div>
@@ -83,6 +85,7 @@ import { getData } from '../../../service/getData';
     name: 'ticket-book',
     data() {
       return {
+        //   <router-link :to="{ name: 'PayDetail' }"></router-link>
         // 获取的json信息
         tb_cdh: null,
         tb_pc: null,
@@ -106,7 +109,6 @@ import { getData } from '../../../service/getData';
         tb_num_list: 8,
         tb_selected_seats: [],
         tb_selected_max_num: 6,
-        tb_jump: true,
       }
     },
     computed: {
@@ -138,21 +140,32 @@ import { getData } from '../../../service/getData';
             for(var seat in this.tb_selected_seats) {
                 submit_seats_id.push(String(this.tb_selected_seats[seat].seat_id));
             }
-            console.log("mov_id="+this.tb_mov_id);
-            console.log("vh_mov_id="+this.tb_vh_mov_id);
-            console.log("seats_id="+submit_seats_id);
-            console.log("price="+this.tb_total_price_value);
+            // console.log("mov_id="+this.tb_mov_id);
+            // console.log("vh_mov_id="+this.tb_vh_mov_id);
+            // console.log("seats_id="+submit_seats_id);
+            // console.log("price="+this.tb_total_price_value);
             getData({apiKey: 'submit', params: {mov_id: this.tb_mov_id},data: {vh_mov_id: this.tb_vh_mov_id, seats_id: submit_seats_id, price: this.tb_total_price_value}})
               .then(data => {
-                  console.log(data);
                   if(data.status == 'OK') {
-                    this.tb_jump = true;
+                    var tickets_id = data.data.tcks_id;
+                    var pt = this.tb_mov_session + this.tb_mov_starttime + '~' + this.tb_mov_endtime;
+                    var ps = [];
+                    for(var i in this.tb_selected_seats) {
+                        ps.push(String(this.my_filter_function(this.tb_selected_seats[i].row_col)));
+                    }
+                    var pm = this.tb_mov_name;
+                    var ptp = this.tb_total_price_value;
+                    var pmi = this.tb_mov_id;
+                    var pmc = this.tb_mov_cinema;
+                    this.$router.push({name: 'PayDetail', query:{pd_mov_id: pmi, pd_time: pt, pd_seat: ps, pd_mov: pm, pd_total_price: ptp, ticks_id: tickets_id, pd_mov_cinema: pmc}});
+
                   } else {
-                      console.log("error");
+                      alert("提交订单失败，请刷新页面后重拾。");
                   }
               })
               .catch(err => {
                   console.log(err);
+                  alert("Error!!!");
               })
         },
         get_seats_info()  {
@@ -196,6 +209,12 @@ import { getData } from '../../../service/getData';
             var e = parseInt(et[0])*60 + parseInt(et[1]);
             return String(e-s) + "分钟";
         },
+        my_filter_function(row_col) {
+            row_col = row_col.split("排");
+            var row = String(parseInt(row_col[0])+1);
+            var col = String(parseInt(row_col[1].split("列")[0])+1);
+            return row+"行"+col+"列";
+        },
     },
     filters: {
         my_filter(row_col) {
@@ -212,7 +231,7 @@ import { getData } from '../../../service/getData';
 
 <style>
 #tb_body_two {
-    height: 65vw;
+    height: 40vw;
 }
 #seat_tag_list {
     padding-left: 6vw;
@@ -243,6 +262,7 @@ import { getData } from '../../../service/getData';
     width: 90%;
     height: 70%;
     margin-left: 10%;
+    margin-top: 5%;
 }
 
 #selected_seat {
@@ -270,13 +290,13 @@ import { getData } from '../../../service/getData';
     height: 75%;
     float: left;
     border-right: 0.1vw dotted rgb(127,127,127);
-    margin-top: 5%;
+    margin-top: 1%;
 }
 
 #seat_list {
-    margin-left: -44.5%;
+    margin-left: -35%;
     margin-top: 5%;
-    width: 90%;
+    width: 70%;
     height: 75%;
     float: left;
 }
@@ -346,8 +366,11 @@ import { getData } from '../../../service/getData';
 
 .div_num {
     line-height: 4vw;
-    height: 12.7%;
+    height: 13%;
     color: rgb(127,127,127);
+}
+.div_num_empty {
+    height: 6%;
 }
 .seat_avai {
     background-image:url("../../../assets/paydetail/可选.png");
@@ -381,7 +404,7 @@ import { getData } from '../../../service/getData';
     cursor: pointer;
 }
 
-span {
+#body_two span {
     color: rgb(127,127,127);
 }
 

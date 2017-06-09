@@ -249,6 +249,7 @@
         this.date = this.selected_cinema.detail[0].date;
 
         //当地缓存
+        localStorage.setItem('movie_id', this.movie_id);
         localStorage.setItem('play_cinema', JSON.stringify(this.selected_cinema));
         localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
         localStorage.setItem('date',this.date);

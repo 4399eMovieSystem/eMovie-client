@@ -55,7 +55,6 @@
       return {
         tologin: false,
         show: false,
-        user: '';
         searchState: false,
 
         target: { name: '广州', id: 1 },

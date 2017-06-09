@@ -1,38 +1,38 @@
 <template>
-  <div>
+  <div >
     <h1 id="Register_title" class="LoginRegister_title" v-if="register">账号注册</h1>
     <h1 id="Login_title" class="LoginRegister_title" v-if="login">账号登录</h1>
     <div id="LoginRegister_infoTel" class="LoginRegister_info">{{Info}}</div>
-    <img id="LoginRegister_cinema" src='../../../assets/background/cinema.jpg'>
-    <div v-if="login">
+    <img id="LoginRegister_cinema" src='../../../assets/background/cinema.png'>
+    <div id="Login_content" v-if="login">
       <ul id="Login_ul">
-        <input id="Login_phone" type="text" title="手机号码" placeholder="手机号码">
-        <input id="Login_password" type="password" title="密码" placeholder="请输入密码">
-        <button @click="login1()" id="Login_lbutton" class="LoginRegister_button">登录</button>
-        <button @click="changed()" class="LoginRegister_button">注册</button>
+        <input class="Login_input" id="Login_phone" type="text" title="手机号码" placeholder="手机号码">
+        <input class="Login_input" id="Login_password" type="password" title="密码" placeholder="请输入密码">
+        <button @click="login1()" id="Login_lbutton" class="Login_button">登录</button>
+        <button @click="changed()" class="Login_button">注册</button>
       </ul>
     </div>
-    <div v-if="register">
-      <ul id="Register_textul">
-        <li>手机号码：</li>
-        <li>验证码：</li>
-        <li>密码：</li>
-        <li>确认密码：</li>
-      </ul>
+    <div  v-if="register">
+      <div id="Register_textul">
+        <div>手机号码：</div>
+        <div>验证码：</div>
+        <div>密码：</div>
+        <div>确认密码：</div>
+      </div>
       <ul id="Register_Errorul">
         <li>{{phoneError}}</li>
         <li>{{codeError}}</li>
         <li>{{passwordError}}</li>
         <li>{{password2Error}}</li>
       </ul>
-      <ul id="Register_ul">
-        <input id="Register_phone" type="text" title="手机号码" placeholder="手机号码">
-        <input id="Register_code" type="text" title="验证码" placeholder="请输入验证码">
-        <button id="Register_codeButton" @click="register_sms" class="LoginRegister_button">{{scend60}}</button>
-        <input id="Register_password" type="password" title="输入密码" placeholder="输入密码">
-        <input id="Register_password2" type="password" title="重新输入密码" placeholder="确认密码">
-        <button @click="register1" id="Register_button" class="LoginRegister_button">注册</button>
-      </ul>
+      <div id="Register_ul">
+        <input class="Register_input" id="Register_phone" type="text" title="手机号码" placeholder="手机号码">
+        <input class="Register_input" id="Register_code" type="text" title="验证码" placeholder="请输入验证码">
+        <button id="Register_codeButton" @click="register_sms" class="Register_button">{{scend60}}</button>
+        <input class="Register_input" id="Register_password" type="password" title="输入密码" placeholder="输入密码">
+        <input class="Register_input" id="Register_password2" type="password" title="重新输入密码" placeholder="确认密码">
+        <button @click="register1" id="Register_button" class="Register_button">注册</button>
+      </div>
     </div>
   </div>
 </template>
@@ -135,36 +135,59 @@
 </script>
 
 <style>
-  input {
+  .Login_input {
     background-color: #DDDBDB;
     border: none;
-    height: 30px;
-    width: 250px;
-    line-height: 30px;
+    height: 10%;
+    width: 70%;
+    line-height: 10%;
+    padding-left: 10px;
   }
-  .LoginRegister_button {
+  #Login_content {
+    width: 90%;
+    height: 90%;
+  }
+  .Login_button {
     border: none;
     background-color: #A5A0A0;
-    border-radius: 5px;
-    width: 100px;
-    height: 30px;
+    border-radius: 3px;
+    width: 30%;
+    height: 10%;
 
     font-family: Georgia, Garamond, serif;
     color: white;
     font-size: 12pt;
 
-    margin-right: 50px;
+    margin-right: 10%;
+    cursor: pointer;
   }
-  #Register_button {
-    display: block;
-       font-size: 18pt;
+  .Register_input {
+    background-color: #DDDBDB;
+    border: none;
+    height: 10%;
+    width: 70%;
+    line-height: 10%;
+    padding-left: 10px;
+    margin-bottom: 1.5em; 
+  }
+  .Register_button {
+      border: none;
+    background-color: #A5A0A0;
+    border-radius: 3px;
+    width: 30%;
+    height: 10%;
+
+    font-family: Georgia, Garamond, serif;
+    color: white;
+    font-size: 12pt;
+
+    margin-right: 10%;
+    cursor: pointer;
   }
   #LoginRegister_cinema {
-    float: left;
-
     position: absolute;
-    left: 10%;
-    top: 30%;
+    margin-top: 10%;
+    margin-left: 15%;
     width: 30%;
     height: 40%;
  }
@@ -174,46 +197,53 @@
   #Login_ul {
     display: inline-block;
     position: absolute;
-    left: 50%;
+    left: 55%;
     top: 40%;
-
+    width: 30%;
+    height: 50%;
   }
   #Login_title {
-    font-size: 24pt;
-
     position: absolute;
-    left: 53%;
-    top: 30%;
+    left: 58%;
+    top: 26%;
+    font-size: 24pt;
+    width: 30%;
     color: rgb(175,140,110);
   }
   #Login_phone {
     display: block;
     
-    margin-bottom: 30px;
+    margin-bottom: 5%;
   }
   #Login_password {
     display: block;
     
-    margin-bottom: 30px;
+    margin-bottom: 5%;
   }
   #Register_textul {
+    display: inline-block;
     position: absolute;
-    left: 45%;
-    top: 30%; 
+    left: 50%;
+    top: 32%; 
     text-align: right;
     color: #51514F;
+    width: auto;
+    height: 50%;
   }
-  #Register_textul li {
-    height: 30px;
-    line-height: 30px;
-    margin-bottom: 30px;
+  #Register_textul div {
+    display: block;
+    height: 10%;
+    vertical-align: bottom;
+    line-height: 10%; 
+    margin-bottom: 1em;
+    
     font-size: 18pt;
   }
    #Register_Errorul {
     list-style-position: inside;
-    display: inline-block;
+    display: block;
     position: absolute;
-    left: 80%;
+    left: 82%;
     top: 30%; 
     margin-left: 0px;
     padding-left: 0px;
@@ -221,51 +251,54 @@
     color: red;
   }
   #Register_Errorul li {
-    height: 30px;
-    line-height: 30px;
+    height: 10%;
+    line-height: 10%;
     margin-bottom: 30px;
-    font-size: 12pt;
+    font-size: 12pt;;
   }
 
   #Register_title {
     position: absolute;
-    left: 49%;
-     font-size: 18pt;
-    top: 22%;
+    left: 50%;
+    font-size: 18pt;
+    top: 20%;
     color: rgb(175,140,110);
   }
   #Register_phone {
     display: block;
-    margin-bottom: 9%;
+
   }
   #Register_code {
     display: inline-block;
-    width: 150px;
-    margin-bottom: 9%;
+    width: 35%;
+
   }
   #Register_codeButton {
     background-color: #DDDBDB;
+    width: 32%;
     color: rgb(227,108,9);
     display: inline-block;
-    margin-bottom: 9%;
     text-align: center;
   }
   #Register_password,#Register_password2 {
     display: block;
-    margin-bottom: 9%;
   }
   #Register_ul {
+    display: inline-block;
     position: absolute;
-    left: 55%;
+    margin: 0px;
+    left: 60%;
     top: 30%;
-    margin-left: 1%;
+    width: 30%;
+    height: 50%;
   }
   #LoginRegister_infoTel {
     display: block;
     position: absolute;
-    left: 65%;
-    top: 80%;
-    width: 350px;
+    left: 58%;
+    top: 70%;
+    width: auto;
+    height: 10%;
     font-size: 18pt;
     color: red;
   }

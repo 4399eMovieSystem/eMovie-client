@@ -30,7 +30,7 @@
   <div id="header-search">
     <div id="header-search-show">
       <input id="header-search-input" placeholder="请输入影片名" v-model="selectedMovie.name" />
-      <div id="header-search-btn" @mouseup="click(false)" @mousedown="click(true)">
+      <div id="header-search-btn" @mouseup="click(false)" @mousedown="click(true)" :disable="this.selectedMovie.name">
         <img src="../../assets/header/unclick.png" class="center" v-if="!searchState" />
         <img src="../../assets/header/click.png" class="center" v-if="searchState" />
       </div>
@@ -109,6 +109,7 @@
         // console.log('1', this.$store.getters.getCity);
         this.$store.commit('setCity', city);
       },
+
       isLogin(item) {
         if (item == 'Login') {
           this.$router.push({ name: 'LoginRegister'});
@@ -116,9 +117,11 @@
           
         else this.$router.push({ name: 'Home'});
       },
+
       click(state) {
+        if (!this.selectedMovie.name) return;
         this.searchState = state;
-        if (!state && this.selectedMovie)
+        if (!state)
           this.$router.push({
             name: 'MovDetail',
             params: { mov_id: this.selectedMovie.mov_id }
@@ -127,7 +130,7 @@
 
       searchMovie(movie) {
         if (!movie) return;
-        console.log('name:', movie.name, 'id:', movie.mov_id);
+        //console.log('name:', movie.name, 'id:', movie.mov_id);
         this.selectedMovie = movie;
         this.mov_list_show = true;
       }

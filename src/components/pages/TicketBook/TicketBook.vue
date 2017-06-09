@@ -99,7 +99,7 @@ import { getData } from '../../../service/getData';
         // 提交的数据
         tb_mov_id: null,
         tb_vh_mov_id: null,
-        tb_vh_id: 1,
+        tb_vh_id: null,
         // 其他数据
         tb_seats: null,
         tb_num_list: 8,
@@ -116,10 +116,7 @@ import { getData } from '../../../service/getData';
         this.tb_cdh = JSON.parse(localStorage.cinema_date_hell)[localStorage.index_of_cinema_date_hell];
         this.tb_pc = JSON.parse(localStorage.play_cinema);
         this.tb_mov_name = localStorage.movie_name;
-        // this.tb_len
         this.tb_version = localStorage.language;
-        console.log("this.tb_pc = "+this.tb_pc);
-        console.log("this.tb_cdh = "+this.tb_cdh);
         this.tb_mov_cinema = this.tb_pc.name;
         this.tb_mov_hall = this.tb_cdh.name;
         this.tb_mov_session = localStorage.date;
@@ -129,7 +126,7 @@ import { getData } from '../../../service/getData';
         this.tb_img_url = localStorage.imgUrl;
         this.tb_mov_id = localStorage.movie_id;
         this.tb_vh_mov_id = this.tb_cdh.vh_mov_id;
-        // this.tb_vh_id = 
+        this.tb_vh_id = this.tb_cdh.vh_id;
         this.tb_mov_len = this.calculate_mov_len();
         this.get_seats_info();
     },
@@ -153,12 +150,13 @@ import { getData } from '../../../service/getData';
               })
         },
         get_seats_info()  {
+            console.log(this.tb_mov_id);
             getData({apiKey: 'seats_info', params: {mov_id: this.tb_mov_id, vh_id: this.tb_vh_id}})
               .then(data => {
                   if(data.status == 'OK') {
                     this.tb_seats = data.data.seats;
                   } else {
-                      console.log('error');
+                      console.log(data);
                   }
               })
               .catch(err => {

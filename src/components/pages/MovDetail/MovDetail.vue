@@ -138,7 +138,7 @@
 
           <div id="md_selectSeat" class="md_screenings_content_title md_emphasis_content">
             <span class="md_selectSeat md_screenings_info" >在线选座</span>
-            <div v-if="user==null" v-for="screening in selected_cinema_date_hells">
+            <div v-if="user!=null" v-for="screening in selected_cinema_date_hells">
               <span class="md_selectSeat md_screenings_info">
                 <router-link :to="{ name: 'TicketBook' }" class="md_link-def"  v-on:click="storeIndex(selected_cinema_date_hells.indexOf(screening))"> 选座购票</router-link>
               </span>
@@ -182,6 +182,12 @@
           .then(response => {
             console.log(response);
             this.user = response.user;
+            if (this.user == null) {
+              console.log("user = null");
+            } else {
+              console.log("user = "+this.user.id + " "+this.user.phone);
+            }
+          
             this.movie_detail = response.data;
             console.log("movie_detail="+this.movie_detail);
             if (this.movie_detail == null) {

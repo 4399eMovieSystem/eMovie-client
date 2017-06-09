@@ -70,6 +70,7 @@
             <span id="tb_total_price_value"><span>￥</span>{{tb_total_price_value}}</span>
         </div>
         <div id="submit" @click="submit">
+            <router-link :to="{ name: 'PayDetail' }" v-if='tb_jump'></router-link>
             <img src="../../../assets/paydetail/提交订单.png">
         </div>
     </div>
@@ -105,6 +106,7 @@ import { getData } from '../../../service/getData';
         tb_num_list: 8,
         tb_selected_seats: [],
         tb_selected_max_num: 6,
+        tb_jump: true,
       }
     },
     computed: {
@@ -132,15 +134,19 @@ import { getData } from '../../../service/getData';
     },
     methods: {
         submit() {
-            var submit_seats_id = [];
+            let submit_seats_id = [];
             for(var seat in this.tb_selected_seats) {
-                submit_seats_id.push(this.tb_selected_seats[seat].seat_id);
+                submit_seats_id.push(String(this.tb_selected_seats[seat].seat_id));
             }
+            console.log("mov_id="+this.tb_mov_id);
+            console.log("vh_mov_id="+this.tb_vh_mov_id);
+            console.log("seats_id="+submit_seats_id);
+            console.log("price="+this.tb_total_price_value);
             getData({apiKey: 'submit', params: {mov_id: this.tb_mov_id},data: {vh_mov_id: this.tb_vh_mov_id, seats_id: submit_seats_id, price: this.tb_total_price_value}})
               .then(data => {
                   console.log(data);
                   if(data.status == 'OK') {
-
+                    this.tb_jump = true;
                   } else {
                       console.log("error");
                   }
@@ -150,7 +156,6 @@ import { getData } from '../../../service/getData';
               })
         },
         get_seats_info()  {
-            console.log(this.tb_mov_id);
             getData({apiKey: 'seats_info', params: {mov_id: this.tb_mov_id, vh_id: this.tb_vh_id}})
               .then(data => {
                   if(data.status == 'OK') {
@@ -200,7 +205,6 @@ import { getData } from '../../../service/getData';
             return row+"行"+col+"列";
         },
     }
-    // <router-link :to="{ name: 'PayDetail' }"></router-link>
   }
 
   

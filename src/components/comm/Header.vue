@@ -55,7 +55,7 @@
       return {
         tologin: false,
         show: false,
-
+        user: '';
         searchState: false,
 
         target: { name: '广州', id: 1 },
@@ -98,8 +98,11 @@
         this.show = !this.show;
       },
       isLogin(item) {
-        if (item == 'Login')
+        if (item == 'Login') {
           this.$router.push({ name: 'LoginRegister'});
+        }
+          
+        else this.$router.push({ name: 'Home'});
       },
       click(state) {
         this.searchState = state;
@@ -254,14 +257,26 @@
     width: 80px;
     height: 180%;
     background: rgba(244, 255, 255, 0.8);
-    left: 13%;
+    left: 0%;
     top: 100%;
     overflow: hidden;  
     border: 1px solid #ccc;
+    cursor: pointer;
   }
-  #header-user-list ul {
-    padding-left: 0px;
+  #header-user-list > ul {
+    position: absolute;
+    width: 120%;
+    height: 100%;  
+    overflow-y: auto;  
+    overflow-x: hidden;
+    margin-top: 0; 
+    padding: 0;
     text-align: center;
+  }
+  #header-user-list li {
+
+    line-height: 40px;
+    height: 40px;
   }
   #header-search {
     position: absolute;

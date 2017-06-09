@@ -226,7 +226,7 @@
         localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
       },
       storeIndex: function(index) {
-        localStorage.setItem('index of cinema_date_hell',index);
+        localStorage.setItem('index_of_cinema_date_hell',index);
       },
       warning:function() {
         alert('请您先登录');
@@ -252,6 +252,9 @@
         localStorage.setItem('play_cinema', JSON.stringify(this.selected_cinema));
         localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
         localStorage.setItem('date',this.date);
+        localStorage.setItem('imgUrl',this.movie_detail.imgUrl);
+        localStorage.setItem('movie_name',this.movie_detail.name);
+        localStorage.setItem('language',this.movie_detail.language);
       }
     },
 

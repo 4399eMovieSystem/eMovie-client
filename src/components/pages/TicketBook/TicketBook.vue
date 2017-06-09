@@ -118,6 +118,8 @@ import { getData } from '../../../service/getData';
         this.tb_mov_name = localStorage.movie_name;
         // this.tb_len
         this.tb_version = localStorage.language;
+        console.log("this.tb_pc = "+this.tb_pc);
+        console.log("this.tb_cdh = "+this.tb_cdh);
         this.tb_mov_cinema = this.tb_pc.name;
         this.tb_mov_hall = this.tb_cdh.name;
         this.tb_mov_session = localStorage.date;

@@ -18,6 +18,11 @@ const APIS = {
     url: '/api/movies/:mov_id',
     method: 'GET'
   },
+  //获取电影列表的信息
+  mov_list:{
+    url: '/api/movies',
+    method: 'GET'
+  },
   // 获取支付页面数据
   get_pay_data: {
     url: '/api/movies/:mov_id/order',

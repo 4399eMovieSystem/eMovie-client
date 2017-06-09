@@ -67,6 +67,11 @@ const APIS = {
   submit: {
     url: '/api/movies/:mov_id/order',
     method: 'POST'
+  },
+  // 获取座位信息
+  seats_info: {
+    url: '/api/movies/:mov_id/seats?vh_id=:vh_id',
+    method: 'GET'
   }
 }
 

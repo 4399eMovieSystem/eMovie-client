@@ -66,8 +66,8 @@
 
       </div>
     </div>
-    <div v-else>
-      该影片不存在
+    <div v-else class="md_error">
+      {{ error_message }}
     </div>
 
     <div id = "md_cinema"  v-if="selected_cinema">
@@ -75,7 +75,7 @@
         <span class="md_title">上映影院</span>
       </h2>
       <ul id = "md_cinemas_list" class="md_emphasis_content">
-        <li class = "md_cinema_list" v-for="play_cinema in play_cinemas" @click="selectCinema(play_cinema)" v-bind:class="{md_active:play_cinema==selected_cinema}">{{ play_cinema.name }}</li>
+        <li class = "md_cinema_list" v-for="play_cinema in play_cinemas" @click="selectCinema(play_cinema)" v-bind:class="{md_cinema_active:play_cinema==selected_cinema}">{{ play_cinema.name }}</li>
       </ul>
       <div id="md_address">影院地址： {{ selected_cinema.address }}</div>
     </div>
@@ -86,17 +86,21 @@
       <div id="md_play_date" v-if="selected_cinema" >
         <h2> 
           <span class = "md_title">观影时间</span>
-          <span v-for="single_detail in selected_cinema.detail"  
-              @click="selectDate(single_detail)" 
+          <span v-for="single_detail in selected_cinema.detail"
               class="md_span_play_date" 
               v-bind:class="{
                 md_bgimg1: selected_cinema.detail.indexOf(single_detail)%3==0,
                 md_bgimg2: selected_cinema.detail.indexOf(single_detail)%3==1,
                 md_bgimg3: selected_cinema.detail.indexOf(single_detail)%3==2,
-              }">
+                md_date_active:  single_detail.date == date
+              }"
+              @click="selectDate(single_detail)">
             {{ single_detail.date }}
           </span>
         </h2>
+      </div>
+      <div v-else class="md_error">
+        {{ error_message_2 }}
       </div>
 
       <div id="md_play_detail" v-if="selected_cinema_date_hells">
@@ -134,9 +138,17 @@
 
           <div id="md_selectSeat" class="md_screenings_content_title md_emphasis_content">
             <span class="md_selectSeat md_screenings_info" >在线选座</span>
-            <div v-for="screening in selected_cinema_date_hells">
-              <span class="md_selectSeat md_screenings_info"><router-link :to="{ name: 'TicketBook' }" class="md_link-def"  v-on:click="storeIndex(selected_cinema_date_hells.indexOf(screening))"> 选座购票</router-link></span>
+            <div v-if="user==null" v-for="screening in selected_cinema_date_hells">
+              <span class="md_selectSeat md_screenings_info">
+                <router-link :to="{ name: 'TicketBook' }" class="md_link-def"  v-on:click="storeIndex(selected_cinema_date_hells.indexOf(screening))"> 选座购票</router-link>
+              </span>
             </div>
+            <div v-else>
+              <span class="md_selectSeat md_screenings_info" v-on:click="warning">
+                <router-link :to="{ name: 'MovDetail' }" class="md_link-def"> 选座购票</router-link>
+              </span>
+            </div>
+
           </div>
 
         </div>
@@ -158,29 +170,39 @@
         movie_id:2,
         selected_cinema:null,
         selected_cinema_date_hells:null,
-        date:null
+        date:null,
+        user:null,
+        error_message:'',
+        error_message_2:''
       }
     },
     mounted:function() {
-        console.log(this.$route.path);
-        console.log(this.movie_id)
-        this.movie_id = this.$route.path.substr(9);
-        console.log(this.movie_id)
+        this.movie_id = this.$route.params.mov_id;
         getData({ apiKey: 'mov_cin_detail', params: { mov_id: this.movie_id }  })
           .then(response => {
             console.log(response);
+            this.user = response.user;
             this.movie_detail = response.data;
-            this.play_cinemas = response.data.play_cinemas;
-            this.selected_cinema = this.play_cinemas[0];
-            console.log(this.selected_cinema)
-            console.log(this.play_cinemas)
-            this.selected_cinema_date_hells = this.selected_cinema.detail[0].video_hell;
-            this.date = this.selected_cinema.detail[0].date;
+            console.log("movie_detail="+this.movie_detail);
+            if (this.movie_detail == null) {
+              this.error_message = '未找到该电影';
+            } else {
+              this.play_cinemas = response.data.play_cinemas;
+              if (this.play_cinemas == '') {
+                this.error_message_2 = '该电影尚未放映，敬请期待';
+              } else {
+                this.selected_cinema = this.play_cinemas[0];
+                console.log(this.selected_cinema)
+                console.log(this.play_cinemas)
+                this.selected_cinema_date_hells = this.selected_cinema.detail[0].video_hell;
+                this.date = this.selected_cinema.detail[0].date;
 
-            //当地缓存
-            localStorage.setItem('play_cinema', JSON.stringify(this.selected_cinema));
-            localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
-            localStorage.setItem('date',this.date);
+                //当地缓存
+                localStorage.setItem('play_cinema', JSON.stringify(this.selected_cinema));
+                localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
+                localStorage.setItem('date',this.date);
+              }
+            }
           })
           .catch(err => {
             console.log('cin_mov err', err);
@@ -202,6 +224,9 @@
       },
       storeIndex: function(index) {
         localStorage.setItem('index of cinema_date_hell',index);
+      },
+      warning:function() {
+        alert('请您先登录');
       }
     }
   }
@@ -305,8 +330,12 @@
     border-bottom: 0.1vw dotted grey;
   }
 
-  .md_active {
+  .md_cinema_active {
     background-color: rgb(197,129,128);
+  }
+
+  .md_date_active {
+    color: orange;
   }
 
   #md_play_date {
@@ -384,6 +413,12 @@
   .md_link-def {
     text-decoration: none;
     font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+    color: orange;
+  }
+
+  .md_error {
+    padding: 2%;
+    font-family: sans-serif;
     color: orange;
   }
 

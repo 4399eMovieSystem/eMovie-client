@@ -57,6 +57,16 @@ const APIS = {
   search_mov: {
     url: '/api/movies/search',
     method: 'GET'
+  },
+  // 确定订单支付
+  pay: {
+    url: '/movies/:mov_id/order/makesure',
+    method: 'POST'
+  },
+  // 提交订单
+  submit: {
+    url: '/api/movies/:mov_id/order',
+    method: 'POST'
   }
 }
 

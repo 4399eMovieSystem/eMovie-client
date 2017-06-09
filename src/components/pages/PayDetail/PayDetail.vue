@@ -29,16 +29,17 @@
                 <input type="password" v-model='pd_password'></input>
             </div>
         </div>
-        <div id="hint" v-if='hint_bool'>
+        <div id="hint" v-if='pd_hint_bool'>
             <img src="../../../assets/paydetail/感叹号.png">
             <div>输入的账户或密码错误</div>
         </div>
-        <div id="pay"><img src="../../../assets/paydetail/付款.png"></div>
+        <div id="pay" @click='pay'><img src="../../../assets/paydetail/付款.png"></div>
 </div>
 </div>
 </template>
 
 <script>
+import { getData } from '../../../service/getData';
   export default {
     name: 'pay-detail',
     data() {
@@ -49,7 +50,24 @@
         pd_total_price: 'pd_total_price',
         pd_account: '',
         pd_password: '',
-        hint_bool: 0,
+        pd_hint_bool: 0,
+        pd_tickets_id: ['1', '2'],
+      }
+    },
+    methods: {
+      pay() {
+        getData({ apiKey: 'pay', data: {tcks_id: this.pd_tickets_id, pay_num: this.pd_account, pay_pwd: this.pd_password, price: this.pd_total_price}})
+        .then(data => {
+          console.log(data)
+          if(data.status == 'OK') {
+            alert("您已成功购票！");
+          } else {
+            alert("支付账号或密码错误！");
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        })
       }
     }
   }
@@ -173,6 +191,7 @@
     width: 10%;
     height: 10%;
     left: 41%;
+    cursor: pointer;
 }
 
 .info {

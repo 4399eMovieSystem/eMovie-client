@@ -5,10 +5,10 @@
   </div>
 
   <div id="header-city">
-    <p @click="show = !show">{{ target.name }}</p>
+    <p @click="show = !show">{{ target }}</p>
     <div id="header-city-list" :class="{ 'header-show': show, 'header-hide': !show }">
       <ul>
-        <li v-for="city in citys" @click="selectCity(city)">{{ city.name }}</li>
+        <li v-for="city in citys" @click="selectCity(city)">{{ city }}</li>
       </ul>
     </div>
   </div>
@@ -28,10 +28,23 @@
   </div>
 
   <div id="header-search">
-    <div id="header-search-input" contenteditable="true" placeholder="请输入影片名"></div>
-    <div id="header-search-btn" @mouseup="click(false)" @mousedown="click(true)">
-      <img src="../../assets/header/unclick.png" class="center" v-if="!searchState" />
-      <img src="../../assets/header/click.png" class="center" v-if="searchState" />
+    <div id="header-search-show">
+      <input id="header-search-input" placeholder="请输入影片名" v-model="selectedMovie.name" />
+      <div id="header-search-btn" @mouseup="click(false)" @mousedown="click(true)">
+        <img src="../../assets/header/unclick.png" class="center" v-if="!searchState" />
+        <img src="../../assets/header/click.png" class="center" v-if="searchState" />
+      </div>
+    </div>
+    <div id="header-search-list" v-if="movies">
+      <div>
+        <ul>
+          <li v-for="movie in movies" @click="searchMovie(movie)">
+            <router-link :to="{ name: 'MovDetail', params: { mov_id: movie.mov_id }}" class="header-search-list-item-font">
+              {{ movie.name }}
+            </router-link>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -48,6 +61,8 @@
 </template>
 
 <script>
+  import { getData } from '../../service/getData';
+
   export default {
     name: 'header',
 
@@ -56,38 +71,41 @@
         tologin: false,
         show: false,
         searchState: false,
-
-        target: { name: '广州', id: 1 },
-        citys: [
-          {
-            name: '广州',
-            id: 1
-          },
-          {
-            name: '深圳',
-            id: 2
-          },
-          {
-            name: '杭州',
-            id: 3
-          },
-          {
-            name: '上海',
-            id: 4
-          },
-          {
-            name: '武汉',
-            id: 5
-          },
-          {
-            name: '北京',
-            id: 6
-          }
-        ],
+        target: '广州',
+        selectedMovie: {
+          name: null,
+          mov_id: null
+        },
+        citys: [ '广州', '深圳', '杭州', '上海', '武汉', '北京' ],
+        movies: null,
+        mov_list_show: false,
         items: [
           'Login',
           'Logout'
         ]
+      }
+    },
+
+    watch: {
+      'selectedMovie.name': {
+        handler: function(curVal, oldVal) {
+          if (curVal === '' || this.mov_list_show) {
+            if (this.mov_list_show && curVal === '') {
+              this.mov_list_show = false;
+            } else {
+              this.movies = null;
+            }
+            return;
+          }
+          getData({ apiKey: 'search_mov', data: { name: curVal }})
+            .then(res => {
+              this.movies = res.data.length && res.data || null;
+            })
+            .catch(err => {
+              console.log('search mov err:', err);
+            })
+        },
+        deep: true
       }
     },
 
@@ -105,6 +123,18 @@
       },
       click(state) {
         this.searchState = state;
+        if (!state && this.selectedMovie)
+          this.$router.push({
+            name: 'MovDetail',
+            params: { mov_id: this.selectedMovie.mov_id }
+          });
+      },
+
+      searchMovie(movie) {
+        if (!movie) return;
+        console.log('name:', movie.name, 'id:', movie.mov_id);
+        this.selectedMovie = movie;
+        this.mov_list_show = true;
       }
     }
   }
@@ -174,11 +204,14 @@
     position: absolute;
     width: 80px;
     height: 180%;
-    background: rgba(244, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.8);
     left: 13%;
     top: 65%;
-    overflow: hidden;  
-    border: 1px solid #ccc;
+    overflow: hidden;
+  }
+
+  #header-city-list li:hover {
+    background-color: rgba(96, 96, 96, 0.2);
   }
 
   #header-city-list > ul {
@@ -242,9 +275,7 @@
     right: 0;
     top: 50%;
     transform: translate(0, -50%);
-
     cursor: pointer;
-
   }
 
   #header-user > img {
@@ -287,10 +318,13 @@
     top: 50%;
     transform: translate(0, -50%);
     border-radius: 0 38px 10px 20px;
+  }
+
+  #header-search-show {
     overflow: hidden;
   }
 
-  #header-search > div {
+  #header-search-show > div, #header-search-show > input {
     display: inline-block;
     position: absolute;
     height: 70%;
@@ -307,14 +341,51 @@
     box-sizing: border-box;
     padding: 4px 8px;
     font-size: 23px;
+    color: rgba(96, 96, 96, 0.5);
     border-radius: 3px;
     overflow: hidden;
     border-radius: 20px 0 0 20px;
+    border: 0;
   }
 
-  #header-search-input:empty:before {
-    content: attr(placeholder);
+  #header-search-input::-webkit-input-placeholder {
     color: rgba(0, 0, 0, 0.3);
+  }
+
+  #header-search-list {
+    position: relative;
+    width: 100%;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    top: 100%;
+    overflow: hidden;
+  }
+
+  #header-search-list > div {
+    position: relative;
+    width: calc(100% + 15px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  #header-search-list ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  #header-search-list li {
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+  }
+
+  #header-search-list li:hover {
+    background-color: rgba(96, 96, 96, 0.2);
+  }
+
+  .header-search-list-item-font {
+    text-decoration: none;
+    color: rgba(96, 96, 96, 0.5);
   }
 
   #header-search-btn {

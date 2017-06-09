@@ -52,6 +52,11 @@ const APIS = {
   register_sms: {
     url: '/api/users/register/sms',
     method: 'POST'
+  },
+  // 搜索列表
+  search_mov: {
+    url: '/api/movies/search',
+    method: 'GET'
   }
 }
 

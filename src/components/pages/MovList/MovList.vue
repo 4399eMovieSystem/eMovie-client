@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="movie_list">
     <div>
       <div id="title_font_1">{{ title1 }}</div>
         <router-link :to="{ name: 'MovDetail', params: { mov_id: movie_list.now[0].mov_id } }">
@@ -57,7 +57,7 @@
               </div>
           </router-link>
           <div id="ticket1">
-            <h class="rank_font">{{movie_list.rank[0].grade}}</h>
+            <span class="rank_font">{{movie_list.rank[0].grade}}</span>
           </div>
         </li>
         <li>
@@ -67,7 +67,7 @@
               </div>
           </router-link>
           <div id="ticket2">
-            <h class="rank_font">{{movie_list.rank[1].grade}}</h>
+            <span class="rank_font">{{movie_list.rank[1].grade}}</span>
           </div>
         </li>
         <li>
@@ -77,7 +77,7 @@
               </div>
           </router-link>
           <div id="ticket3">
-            <h class="rank_font">{{movie_list.rank[2].grade}}</h>
+            <span class="rank_font">{{movie_list.rank[2].grade}}</span>
           </div>
         </li>
         <li>
@@ -86,8 +86,8 @@
                 {{movie_list.rank[3].name}}
               </div>
           </router-link>
-          <div id="ticket4">
-            <h class="rank_font">{{movie_list.rank[3].grade}}</h>
+          <div id="ticket4" v-if="movie_list">
+            <span class="rank_font">{{movie_list.rank[3].grade}}</span>
           </div>
         </li>
         <li>
@@ -97,7 +97,7 @@
               </div>
           </router-link>
           <div id="ticket5">
-            <h class="rank_font">{{movie_list.rank[4].grade}}</h>
+            <span class="rank_font">{{movie_list.rank[4].grade}}</span>
           </div>
         </li>
       </ul>

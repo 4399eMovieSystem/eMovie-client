@@ -29,7 +29,7 @@
                 <input type="password" v-model='pd_password'></input>
             </div>
         </div>
-        <div id="hint" v-if='pd_hint_bool'>
+        <div id="hint" v-if='hint_bool'>
             <img src="../../../assets/paydetail/感叹号.png">
             <div>输入的账户或密码错误</div>
         </div>
@@ -50,11 +50,10 @@ import { getData } from '../../../service/getData';
         pd_total_price: 'pd_total_price',
         pd_account: '',
         pd_password: '',
-        pd_hint_bool: 0,
-        pd_tickets_id: ['1', '2'],
+        hint_bool: 0,
       }
     },
-    methods: {
+  methods: {
       pay() {
         getData({ apiKey: 'pay', data: {tcks_id: this.pd_tickets_id, pay_num: this.pd_account, pay_pwd: this.pd_password, price: this.pd_total_price}})
         .then(data => {

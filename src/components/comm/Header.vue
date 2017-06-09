@@ -199,12 +199,12 @@
 
   #header-city-list {
     position: absolute;
-    width: 80px;
+    width: 100%;
     height: 180%;
     background: rgba(255, 255, 255, 0.8);
-    left: 13%;
     top: 65%;
     overflow: hidden;
+    z-index: 5;
   }
 
   #header-city-list li:hover {
@@ -213,7 +213,7 @@
 
   #header-city-list > ul {
     position: absolute;
-    width: 120%;
+    width: calc(100% + 15px);
     height: 100%;  
     overflow-y: auto;  
     overflow-x: hidden;
@@ -341,6 +341,7 @@
     position: relative;
     width: 100%;
     height: auto;
+    max-height: 400%;
     background-color: rgba(255, 255, 255, 0.8);
     top: 100%;
     overflow: hidden;

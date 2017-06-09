@@ -138,9 +138,9 @@
 
           <div id="md_selectSeat" class="md_screenings_content_title md_emphasis_content">
             <span class="md_selectSeat md_screenings_info" >在线选座</span>
-            <div v-if="user!=null" v-for="screening in selected_cinema_date_hells">
+            <div v-if="user!=null" v-for="screening in selected_cinema_date_hells"  v-on:click="storeIndex(selected_cinema_date_hells.indexOf(screening))">
               <span class="md_selectSeat md_screenings_info">
-                <router-link :to="{ name: 'TicketBook' }" class="md_link-def"  v-on:click="storeIndex(selected_cinema_date_hells.indexOf(screening))"> 选座购票</router-link>
+                <router-link :to="{ name: 'TicketBook' }" class="md_link-def" > 选座购票</router-link>
               </span>
             </div>
             <div v-else>
@@ -180,34 +180,28 @@
         this.movie_id = this.$route.params.mov_id;
         getData({ apiKey: 'mov_cin_detail', params: { mov_id: this.movie_id }  })
           .then(response => {
-            console.log(response);
-            this.user = response.user;
-            if (this.user == null) {
-              console.log("user = null");
-            } else {
-              console.log("user = "+this.user.id + " "+this.user.phone);
-            }
-          
-            this.movie_detail = response.data;
-            console.log("movie_detail="+this.movie_detail);
-            if (this.movie_detail == null) {
-              this.error_message = '未找到该电影';
-            } else {
-              this.play_cinemas = response.data.play_cinemas;
+            if (response.status == "OK") {
+              this.user = response.user;
+              this.movie_detail = response.data;
+              this.play_cinemas = this.movie_detail.play_cinemas;
               if (this.play_cinemas == '') {
                 this.error_message_2 = '该电影尚未放映，敬请期待';
               } else {
                 this.selected_cinema = this.play_cinemas[0];
-                console.log(this.selected_cinema)
-                console.log(this.play_cinemas)
                 this.selected_cinema_date_hells = this.selected_cinema.detail[0].video_hell;
                 this.date = this.selected_cinema.detail[0].date;
 
                 //当地缓存
+                localStorage.setItem('movie_id', this.movie_id);
+                localStorage.setItem('movie_name', this.movie_detail.name);
+                localStorage.setItem('imgUrl', this.movie_detail.imgUrl);
+                localStorage.setItem('language', this.movie_detail.language);
                 localStorage.setItem('play_cinema', JSON.stringify(this.selected_cinema));
                 localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
                 localStorage.setItem('date',this.date);
               }
+            } else {
+              this.error_message = response.msg;
             }
           })
           .catch(err => {
@@ -281,6 +275,7 @@
     width: 66%;
     height: 35%;
     float: right;
+    line-height: 200%;
   }
 
   #md_left_content {
@@ -305,7 +300,7 @@
     margin-left: 1%;
     margin-bottom: 1%;
     clear: both;
-    line-height: 120%;
+
   }
 
   .md_cinema_list {

@@ -138,9 +138,9 @@
 
           <div id="md_selectSeat" class="md_screenings_content_title md_emphasis_content">
             <span class="md_selectSeat md_screenings_info" >在线选座</span>
-            <div v-if="user!=null" v-for="screening in selected_cinema_date_hells">
+            <div v-if="user!=null" v-for="screening in selected_cinema_date_hells"  v-on:click="storeIndex(selected_cinema_date_hells.indexOf(screening))">
               <span class="md_selectSeat md_screenings_info">
-                <router-link :to="{ name: 'TicketBook' }" class="md_link-def"  v-on:click="storeIndex(selected_cinema_date_hells.indexOf(screening))"> 选座购票</router-link>
+                <router-link :to="{ name: 'TicketBook' }" class="md_link-def" > 选座购票</router-link>
               </span>
             </div>
             <div v-else>
@@ -182,7 +182,6 @@
         this.movie_id = this.$route.params.mov_id;
         getData({ apiKey: 'mov_cin_detail', params: { mov_id: this.movie_id }  })
           .then(response => {
-            console.log(response);
             this.user = response.user;
             if (this.user == null) {
               console.log("user = null");
@@ -194,7 +193,7 @@
             console.log("movie_detail="+this.movie_detail);
             if (this.movie_detail == null) {
               this.error_message = '未找到该电影';
-            } else {
+            } else if (response.status === 'OK') {
               // this.play_cinemas = response.data.play_cinemas;
               this.all_cinemas = response.data.play_cinemas;
               // 根据当前地区筛选要显示的影院
@@ -204,6 +203,8 @@
               } else {
                 this.setMessages();
               }
+            } else {
+              this.error_message = response.msg;
             }
           })
           .catch(err => {
@@ -317,6 +318,7 @@
     width: 66%;
     height: 35%;
     float: right;
+    line-height: 200%;
   }
 
   #md_left_content {
@@ -341,7 +343,7 @@
     margin-left: 1%;
     margin-bottom: 1%;
     clear: both;
-    line-height: 120%;
+
   }
 
   .md_cinema_list {

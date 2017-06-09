@@ -106,7 +106,7 @@
       selectCity(city) {
         this.target = city;
         this.show = !this.show;
-        console.log('1', this.$store.getters.getCity);
+        // console.log('1', this.$store.getters.getCity);
         this.$store.commit('setCity', city);
       },
       isLogin(item) {

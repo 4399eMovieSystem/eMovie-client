@@ -51,6 +51,7 @@
       <div id="title_font_3">{{ title3 }}</div>
       <ul>
         <li>
+          <div class="rank1_pic"><img src="../../../assets/movie_list/rank1.png"/></div>
           <router-link :to="{ name: 'MovDetail', params: { mov_id: movie_list.rank[0].mov_id } }">
               <div id="movie1" v-if="movie_list" class="rank_font">
                 {{movie_list.rank[0].name}}
@@ -61,6 +62,7 @@
           </div>
         </li>
         <li>
+          <div class="rank2_pic"><img src="../../../assets/movie_list/rank2.png"/></div>
           <router-link :to="{ name: 'MovDetail', params: { mov_id: movie_list.rank[1].mov_id } }">
               <div id="movie2" v-if="movie_list" class="rank_font">
                 {{movie_list.rank[1].name}}
@@ -71,6 +73,7 @@
           </div>
         </li>
         <li>
+          <div class="rank3_pic"><img src="../../../assets/movie_list/rank3.png"/></div>
           <router-link :to="{ name: 'MovDetail', params: { mov_id: movie_list.rank[2].mov_id } }">
               <div id="movie3" v-if="movie_list" class="rank_font">
                 {{movie_list.rank[2].name}}
@@ -81,6 +84,7 @@
           </div>
         </li>
         <li>
+          <span class="rank4_pic">4</span>
           <router-link :to="{ name: 'MovDetail', params: { mov_id: movie_list.rank[3].mov_id } }">
               <div id="movie4" v-if="movie_list" class="rank_font">
                 {{movie_list.rank[3].name}}
@@ -91,6 +95,7 @@
           </div>
         </li>
         <li>
+          <span class="rank5_pic">5</span>
           <router-link :to="{ name: 'MovDetail', params: { mov_id: movie_list.rank[4].mov_id } }">
               <div id="movie5" v-if="movie_list" class="rank_font">
                 {{movie_list.rank[4].name}}
@@ -200,7 +205,7 @@
     font-weight: bold;
     color:grey;
     position: absolute;
-    left:65%;
+    left:64%;
     top:15%;
      text-shadow: 0 0 20px red;
   }
@@ -220,52 +225,89 @@
   }
   #movie1{
     position: absolute;
-    left:67%;
-    top:24%;
+    left:70%;
+    top:28%;
   }
   #movie2{
     position: absolute;
-    left:67%;
-    top:30%;
+    left:70%;
+    top:38%;
   }
   #movie3{
     position: absolute;
-    left:67%;
-    top:36%;
+    left:70%;
+    top:47%;
   }
   #movie4{
     position: absolute;
-    left:67%;
-    top:42%;
+    left:70%;
+    top:56%;
   }
   #movie5{
     position: absolute;
-    left:67%;
-    top:48%;
+    left:70%;
+    top:62%;
   }
   #ticket1{
     position: absolute;
-    left:85%;
-    top:24%;
+    left:89%;
+    top:28%;
   }
   #ticket2{
     position: absolute;
-    left:85%;
-    top:30%;
+    left:89%;
+    top:38%;
   }
   #ticket3{
     position: absolute;
-    left:85%;
-    top:36%;
+    left:89%;
+    top:47%;
   }
   #ticket4{
     position: absolute;
-    left:85%;
-    top:42%;
+    left:89%;
+    top:56%;
   }
   #ticket5{
     position: absolute;
-    left:85%;
-    top:48%;
+    left:89%;
+    top:62%;
+  }
+  .rank1_pic{
+    position: absolute;
+    left:65%;
+    top:24%;
+  }
+  .rank2_pic{
+    position: absolute;
+    left:65.3%;
+    top:35%;
+  }
+  .rank2_pic img{
+    width:85%;
+  }
+  .rank3_pic{
+    position: absolute;
+    left:65.4%;
+    top:45%;
+  }
+  .rank3_pic img{
+    width:75%;
+  }
+  .rank4_pic{
+    position: absolute;
+    left:66.5%;
+    top:56%;
+    font-size: 1.5vw;
+    font-weight: bold;
+    color:grey;
+  }
+  .rank5_pic{
+    position: absolute;
+    left:66.5%;
+    top:62%;
+    font-size: 1.5vw;
+    font-weight: bold;
+    color:grey;
   }
 </style>

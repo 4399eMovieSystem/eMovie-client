@@ -173,7 +173,12 @@
         date:null,
         user:null,
         error_message:'',
-        error_message_2:''
+        error_message_2:'',
+        sortBy:function (field) {
+            return function(a,b) {
+                return a[field] - b[field];
+            }
+        }
       }
     },
     mounted:function() {
@@ -185,10 +190,11 @@
               this.movie_detail = response.data;
               this.play_cinemas = this.movie_detail.play_cinemas;
               if (this.play_cinemas == '') {
-                this.error_message_2 = '该电影尚未放映，敬请期待';
+                this.error_message_2 = '该电影在该地区尚未放映，敬请期待';
               } else {
                 this.selected_cinema = this.play_cinemas[0];
-                this.selected_cinema_date_hells = this.selected_cinema.detail[0].video_hell;
+                this.selected_cinema_date_hells = this.selected_cinema.detail[0].video_hell.sort(this.sortBy("starttime"));
+                
                 this.date = this.selected_cinema.detail[0].date;
 
                 //当地缓存
@@ -212,22 +218,30 @@
       selectCinema(play_cinema) {
         this.selected_cinema = play_cinema;
         this.selected_cinema_date_hells = this.selected_cinema.detail[0].video_hell;
+     //   this.selected_cinema_date_hells.sort(by("starttime"));
 
         localStorage.setItem('play_cinema', JSON.stringify(this.selected_cinema));
         localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
       },
+
       selectDate(detail) {
         this.selected_cinema_date_hells = detail.video_hell;
+     //   this.selected_cinema_date_hells.sort(by("starttime"));
+
         this.date = detail.date;
         localStorage.setItem('date',this.date);
         localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
       },
+
       storeIndex: function(index) {
         localStorage.setItem('index of cinema_date_hell',index);
       },
+
       warning:function() {
         alert('请您先登录');
       }
+
+      
     }
   }
 </script>

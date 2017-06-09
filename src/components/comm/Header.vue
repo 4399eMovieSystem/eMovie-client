@@ -48,7 +48,6 @@
     </div>
   </div>
 
-
   <div id="header-user">
     <img src="../../assets/header/user.png" @click="tologin = !tologin" />
     <div id="header-user-list" :class="{'header-show': tologin, 'header-hide': !tologin}">
@@ -72,17 +71,11 @@
         show: false,
         searchState: false,
         target: '广州',
-        selectedMovie: {
-          name: null,
-          mov_id: null
-        },
+        selectedMovie: { name: null, mov_id: null },
         citys: [ '广州', '深圳', '杭州', '上海', '武汉', '北京' ],
         movies: null,
         mov_list_show: false,
-        items: [
-          'Login',
-          'Logout'
-        ]
+        items: [ 'Login', 'Logout' ]
       }
     },
 
@@ -113,6 +106,8 @@
       selectCity(city) {
         this.target = city;
         this.show = !this.show;
+        // console.log('1', this.$store.getters.getCity);
+        this.$store.commit('setCity', city);
       },
       isLogin(item) {
         if (item == 'Login') {

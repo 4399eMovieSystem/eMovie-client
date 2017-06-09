@@ -137,7 +137,8 @@
 
 <style>
   .image{
-    width:40%;
+    width:10vw;
+    height:13vw;
   }
   #post1{
     position: absolute;
@@ -214,15 +215,7 @@
     font-weight: bold;
     color:grey;
   }
-  .rank_first_font{
 
-  }
-  .rank_second_font{
-    
-  }
-  .rank_third_font{
-    
-  }
   #movie1{
     position: absolute;
     left:70%;

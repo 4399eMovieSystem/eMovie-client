@@ -1,10 +1,13 @@
 <template>
   <div>
     <div class="titlestyle">{{ title }}</div>
-  
-      <img class="mainpic" src="../../../assets/home/movie2.jpg" />
-    <router-link :to="{ name: 'MovList' }">跳转到电影列表页面</router-link>
-    <router-link :to="{ name: 'LoginRegister' }">登录注册页面</router-link>
+      <div>
+        <img class="side_left" src="../../../assets/home/side.png"/>
+        <img class="left" src="../../../assets/home/left.png"/>
+        <img class="mainpic" src="../../../assets/home/main1.jpg" />
+        <img class="side_right" src="../../../assets/home/side.png"/>
+        <img class="right" src="../../../assets/home/right.png"/>
+      </div>
   </div>
 </template>
 
@@ -14,7 +17,7 @@
     name: 'home',
     data() {
       return {
-        title: '欢迎来到快乐影购，开始您的美好观影之旅吧！',
+        title: '欢迎来到快乐影购！',
         people: 'wenhan',
         
       }
@@ -26,19 +29,41 @@
 <style>
     .titlestyle{
       position: absolute;
-      left: 20%;
-      top:15%;
-      font-size: 35px;
+      left: 5%;
+      top:14.5%;
+      font-size: 25px;
       font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
       color: orange;
-      text-shadow: 1px 1px rgba(197, 223, 248,0.8),2px 2px rgba(197, 223, 248,0.8),3px 3px rgba(197, 223, 248,0.8),4px 4px rgba(197, 223, 248,0.8),5px 5px rgba(197, 223, 248,0.8);
     }
     .mainpic{
-      width: 80%;
-      height: 75%;
+      width: 53%;
       position: absolute;
-      left: 10%;
-      top:25%;
+      left: 20%;
+      top:20%;
       
+    }
+    .side_left{
+      position: absolute;
+      left: 15.8%;
+      top:20%;
+      height:72%;
+    }
+    .side_right{
+      position: absolute;
+      left: 70%;
+      top:20%;
+      height:72%;
+    }
+    .left{
+      position: absolute;
+      left:15.8%;
+      top:50%;
+      width:4%;
+    }
+    .right{
+      position: absolute;
+      left: 70.4%;
+      top:50%;
+      width:4%;
     }
 </style>

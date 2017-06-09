@@ -159,6 +159,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   import { getData } from '../../../service/getData';
 
   export default {
@@ -166,6 +167,7 @@
     data() {
       return {
         movie_detail:null,
+        all_cinemas: null,
         play_cinemas:null,
         movie_id:2,
         selected_cinema:null,
@@ -193,20 +195,14 @@
             if (this.movie_detail == null) {
               this.error_message = '未找到该电影';
             } else {
-              this.play_cinemas = response.data.play_cinemas;
-              if (this.play_cinemas == '') {
-                this.error_message_2 = '该电影尚未放映，敬请期待';
+              // this.play_cinemas = response.data.play_cinemas;
+              this.all_cinemas = response.data.play_cinemas;
+              // 根据当前地区筛选要显示的影院
+              this.filter();
+              if (!this.play_cinemas.length) {
+                this.error_message_2 = '该电影在当前地区尚未放映，敬请期待';
               } else {
-                this.selected_cinema = this.play_cinemas[0];
-                console.log(this.selected_cinema)
-                console.log(this.play_cinemas)
-                this.selected_cinema_date_hells = this.selected_cinema.detail[0].video_hell;
-                this.date = this.selected_cinema.detail[0].date;
-
-                //当地缓存
-                localStorage.setItem('play_cinema', JSON.stringify(this.selected_cinema));
-                localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
-                localStorage.setItem('date',this.date);
+                this.setMessages();
               }
             }
           })
@@ -233,6 +229,46 @@
       },
       warning:function() {
         alert('请您先登录');
+      },
+
+      filter: function() {
+        let reg = new RegExp(this.city);
+        this.play_cinemas = this.all_cinemas.filter(item => reg.test(item.address));
+        this.selected_cinema = null;
+        this.selected_cinema_date_hells = null;
+        this.date = null;
+        localStorage.removeItem('play_cinema');
+        localStorage.removeItem('cinema_date_hell');
+        localStorage.removeItem('date');
+      },
+
+      setMessages: function() {
+        this.selected_cinema = this.play_cinemas[0];
+        this.selected_cinema_date_hells = this.selected_cinema.detail[0].video_hell;
+        this.date = this.selected_cinema.detail[0].date;
+
+        //当地缓存
+        localStorage.setItem('play_cinema', JSON.stringify(this.selected_cinema));
+        localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
+        localStorage.setItem('date',this.date);
+      }
+    },
+
+    // 映射全局变量 city
+    computed: {
+      ...mapGetters({
+        city: 'getCity'
+      })
+    },
+    // 为全局变量 city 注册监听函数
+    watch: {
+      city: function() {
+        this.filter();
+        if (!this.play_cinemas.length) {
+          this.error_message_2 = '该电影在当前地区尚未放映，敬请期待';
+        } else {
+          this.setMessages();
+        }
       }
     }
   }

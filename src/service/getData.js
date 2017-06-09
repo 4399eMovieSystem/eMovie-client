@@ -14,14 +14,13 @@ import axios from 'axios'
  */
 export const getData = ({ apiKey, params, data }) => {
   let api = getAPI(apiKey, params);
-  console.log(api)
 	let url = api.url;
-  if (api.mothod == 'GET') {
+
+  if (api.method == 'GET' && data) {
     let dataStr = '';
     Object.keys(data).forEach(key => {
       dataStr += key + '=' + data[key] + '&';
-    })
-
+    });
     if (dataStr !== '') {
       dataStr = dataStr.substr(0, dataStr.lastIndexOf('&'));
 			url += '?' + dataStr;

@@ -31,7 +31,7 @@ export const getData = ({ apiKey, params, data }) => {
     method: api.method,
     url,
     data: data,
-    transformRequest: [
+    /*transformRequest: [
       function(data) {
         let ret = '';
         for (let it in data) {
@@ -40,10 +40,10 @@ export const getData = ({ apiKey, params, data }) => {
         ret = ret.substr(0, ret.lastIndexOf('&'));
         return ret;
       }
-    ],
-    headers: {
+    ],*/
+    /*headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    },*/
     withCredentials: true
   }).then(res => {
     return res.data;

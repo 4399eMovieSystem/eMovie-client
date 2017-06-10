@@ -14,10 +14,10 @@
                 <div class="info" id="seat_name">座位</div>
             </div>
             <div id="row_two">
-                <div>{{pd_time}}</div>
-                <div>{{pd_mov}}</div>
-                <div>{{pd_mov_cinema}}</div>
-                <div>
+                <div class="row_two_div">{{pd_time}}</div>
+                <div class="row_two_div">{{pd_mov}}</div>
+                <div class="row_two_div">{{pd_mov_cinema}}</div>
+                <div class="row_two_seat">
                     <span class="pd_seat" v-for="seat in pd_seat" v-if="pd_loop_flag">{{seat}}</span>
                     <span class="pd_seat" v-if="!pd_loop_flag">{{String(pd_seat)}}</span>
                 </div>
@@ -178,9 +178,9 @@ import { getData } from '../../../service/getData';
     padding-bottom: 2vh;
 }
 
-#row_two div {
+.row_two_div {
     font-weight: bold;
-    height: 100%;
+    margin-top: 2%;
     width: 70%;
 }
 #total_price, #total_price span {
@@ -255,5 +255,11 @@ import { getData } from '../../../service/getData';
 
 #seat_name {
     text-align: left;
+}
+
+.row_two_seat {
+    margin-top: -1%;
+    font-weight: bold;
+    width: 70%;
 }
 </style>

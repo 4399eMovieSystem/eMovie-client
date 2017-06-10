@@ -261,9 +261,10 @@ import { getData } from '../../../service/getData';
     height: 40vw;
 }
 #seat_tag_list {
-    margin-left: 10%;
+    margin-left: 12%;
     margin-top: 2%;
-    height: 6%;
+    height: 7%;
+    width: 45%;
 }
 
 #seat_tag_list img {
@@ -294,13 +295,17 @@ import { getData } from '../../../service/getData';
 
 #selected_seat {
     margin-top: 3%;
-    width: 90%;
+    width: 58%;
     height: 30%;
-    float: right;
+    float: left;
+    left: 29%;
+    position: relative;
 }
 
 .seat_tag {
-    display: inline;
+    width: 20%;
+    float: left;
+    margin-left: 5%;
 }
 
 #screen {
@@ -421,7 +426,7 @@ import { getData } from '../../../service/getData';
     float: left;
     margin-right: 2%;
     margin-bottom: 0.5%;
-    width: 14%;
+    width: 20%;
     color: rgb(118,146,60);
 }
 

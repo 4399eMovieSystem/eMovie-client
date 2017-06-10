@@ -85,7 +85,6 @@ import { getData } from '../../../service/getData';
     name: 'ticket-book',
     data() {
       return {
-        //   <router-link :to="{ name: 'PayDetail' }"></router-link>
         // 获取的json信息
         tb_cdh: null,
         tb_pc: null,
@@ -115,20 +114,46 @@ import { getData } from '../../../service/getData';
         tb_total_price_value: function() {
             return this.tb_selected_seats.length * this.tb_mov_price;
         },
+        // tb_mov_hall: function() {
+        //     return this.tb_cdh.name;
+        // },
+        // tb_mov_cinema: function() {
+        //     return this.tb_pc.name;
+        // },
+        // tb_mov_starttime: function() {
+        //     return this.tb_cdh.starttime;
+        // },
+        // tb_mov_endtime: function() {
+        //     return this.tb_cdh.endtime;
+        // },
+        // tb_mov_price: function() {
+        //     return this.tb_cdh.price;
+        // },
+        // tb_vh_mov_id: function() {
+        //     return this.tb_cdh.vh_mov_id;
+        // },
+        // tb_vh_id: function() {
+        //     this.tb_cdh.vh_id;
+        // }
     },
-    mounted: function() {
+    created: function() {
+        console.log(localStorage.cinema_date_hell);
+        console.log(localStorage.index_of_cinema_date_hell);
         this.tb_cdh = JSON.parse(localStorage.cinema_date_hell)[localStorage.index_of_cinema_date_hell];
         this.tb_pc = JSON.parse(localStorage.play_cinema);
+    },
+    mounted: function() {
         this.tb_mov_name = localStorage.movie_name;
         this.tb_version = localStorage.language;
+        this.tb_mov_session = localStorage.date;
+        this.tb_img_url = localStorage.imgUrl;
+        this.tb_mov_id = localStorage.movie_id;
+
         this.tb_mov_cinema = this.tb_pc.name;
         this.tb_mov_hall = this.tb_cdh.name;
-        this.tb_mov_session = localStorage.date;
         this.tb_mov_starttime = this.tb_cdh.starttime;
         this.tb_mov_endtime = this.tb_cdh.endtime;
         this.tb_mov_price = this.tb_cdh.price;
-        this.tb_img_url = localStorage.imgUrl;
-        this.tb_mov_id = localStorage.movie_id;
         this.tb_vh_mov_id = this.tb_cdh.vh_mov_id;
         this.tb_vh_id = this.tb_cdh.vh_id;
         this.tb_mov_len = this.calculate_mov_len();
@@ -169,6 +194,8 @@ import { getData } from '../../../service/getData';
               })
         },
         get_seats_info()  {
+            // console.log("mov_id="+this.tb_mov_id);
+            // console.log("vh_id="+this.tb_vh_id);
             getData({apiKey: 'seats_info', params: {mov_id: this.tb_mov_id, vh_id: this.tb_vh_id}})
               .then(data => {
                   if(data.status == 'OK') {

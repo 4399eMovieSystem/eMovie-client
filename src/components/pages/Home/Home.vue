@@ -124,21 +124,21 @@
       background-size: 100%,100%;
     }
     .pictwo{
-      width: 40vw;
-      height: 24vw;
+      width: 75%;
+      height: 78%;
       position: absolute;
-      left: 28%;
-      top:25%;
+      left: 7%;
+      top:8%;
       background-image: url("../../../assets/home/main2.jpg");
       background-repeat: no-repeat;
       background-size: 100%,100%;
     }
     .picthree{
-      width: 40vw;
-      height: 24vw;
+      width: 75%;
+      height: 78%;
       position: absolute;
-      left: 28%;
-      top:25%;
+      left: 7%;
+      top:8%;
       background-image: url("../../../assets/home/main3.jpg");
       background-repeat: no-repeat;
       background-size: 100%,100%;

@@ -8,7 +8,7 @@
         </h1>
       </div>
 
-      <div id = "md_detail"  class="md_movie_introduction">
+      <div id = "md_detail"  class="md_emphasis_content md_movie_introduction">
 
 
         <div id = "md_poster">
@@ -138,7 +138,7 @@
 
           <div id="md_selectSeat" class="md_screenings_content_title md_emphasis_content">
             <span class="md_selectSeat md_screenings_info" >在线选座</span>
-            <div v-if="user!=null" v-for="screening in selected_cinema_date_hells"  v-on:click="storeIndex(selected_cinema_date_hells.indexOf(screening))">
+            <div v-if="user!=null" v-for="screening in selected_cinema_date_hells"  v-on:mouseover="storeIndex(selected_cinema_date_hells.indexOf(screening))">
               <span class="md_selectSeat md_screenings_info">
                 <router-link :to="{ name: 'TicketBook' }" class="md_link-def" > 选座购票</router-link>
               </span>
@@ -175,10 +175,80 @@
         date:null,
         user:null,
         error_message:'',
-        error_message_2:''
+        error_message_2:'',
+        index_of_cinema_date_hell:null
       }
     },
-    mounted:function() {
+    created:function() {
+      this.setData();
+    },
+    methods: {
+      selectCinema(play_cinema) {
+        this.selected_cinema = play_cinema;
+        this.selected_cinema_date_hells = this.selected_cinema.detail[0].video_hell.sort(this.sortBy('starttime','name'));
+
+        localStorage.setItem('play_cinema', JSON.stringify(this.selected_cinema));
+        localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
+      },
+      selectDate(detail) {
+        this.selected_cinema_date_hells = detail.video_hell.sort(this.sortBy('starttime','name'));
+        this.date = detail.date;
+        localStorage.setItem('date',this.date);
+        localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
+      },
+      storeIndex: function(index) {
+      //  this.index_of_cinema_date_hell = index;
+        localStorage.setItem('index_of_cinema_date_hell',index);
+      },
+      warning:function() {
+        alert('请您先登录');
+      },
+
+      filter: function() {
+        let reg = new RegExp(this.city);
+        this.play_cinemas = this.all_cinemas.filter(item => reg.test(item.address));
+        this.selected_cinema = null;
+        this.selected_cinema_date_hells = null;
+        this.date = null;
+        localStorage.removeItem('play_cinema');
+        localStorage.removeItem('cinema_date_hell');
+        localStorage.removeItem('date');
+      },
+
+      setMessages: function() {
+        this.selected_cinema = this.play_cinemas[0];
+        console.log('sort');
+        console.log(this.selected_cinema.detail[0].video_hell);
+        console.log(this.selected_cinema.detail[0].video_hell.sort(this.sortBy("starttime",'name')));
+        this.selected_cinema_date_hells = this.selected_cinema.detail[0].video_hell.sort(this.sortBy('starttime','name'));
+        this.date = this.selected_cinema.detail[0].date;
+
+        //当地缓存
+        localStorage.setItem('movie_id',this.movie_id);
+        localStorage.setItem('play_cinema', JSON.stringify(this.selected_cinema));
+        localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
+        localStorage.setItem('date',this.date);
+        localStorage.setItem('imgUrl',this.movie_detail.imgUrl);
+        localStorage.setItem('movie_name',this.movie_detail.name);
+        localStorage.setItem('language',this.movie_detail.language);
+      },
+      sortBy:function (key1,key2) {
+        return function(a,b) {
+          if (a[key1] < b[key1])
+            return -1;
+          else if (a[key1] == b[key1]) {
+            if (a[key2] < b[key2]) {
+              return -1;
+            } else {
+              return 1;
+            }
+          } else {
+            return 1;
+          }
+        }
+      },
+
+      setData:function() {
         this.movie_id = this.$route.params.mov_id;
         getData({ apiKey: 'mov_cin_detail', params: { mov_id: this.movie_id }  })
           .then(response => {
@@ -210,53 +280,7 @@
           .catch(err => {
             console.log('cin_mov err', err);
           })
-    },
-    methods: {
-      selectCinema(play_cinema) {
-        this.selected_cinema = play_cinema;
-        this.selected_cinema_date_hells = this.selected_cinema.detail[0].video_hell;
-
-        localStorage.setItem('play_cinema', JSON.stringify(this.selected_cinema));
-        localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
-      },
-      selectDate(detail) {
-        this.selected_cinema_date_hells = detail.video_hell;
-        this.date = detail.date;
-        localStorage.setItem('date',this.date);
-        localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
-      },
-      storeIndex: function(index) {
-        localStorage.setItem('index_of_cinema_date_hell',index);
-      },
-      warning:function() {
-        alert('请您先登录');
-      },
-
-      filter: function() {
-        let reg = new RegExp(this.city);
-        this.play_cinemas = this.all_cinemas.filter(item => reg.test(item.address));
-        this.selected_cinema = null;
-        this.selected_cinema_date_hells = null;
-        this.date = null;
-        localStorage.removeItem('play_cinema');
-        localStorage.removeItem('cinema_date_hell');
-        localStorage.removeItem('date');
-      },
-
-      setMessages: function() {
-        this.selected_cinema = this.play_cinemas[0];
-        this.selected_cinema_date_hells = this.selected_cinema.detail[0].video_hell;
-        this.date = this.selected_cinema.detail[0].date;
-
-        //当地缓存
-        localStorage.setItem('movie_id', this.movie_id);
-        localStorage.setItem('play_cinema', JSON.stringify(this.selected_cinema));
-        localStorage.setItem('cinema_date_hell', JSON.stringify(this.selected_cinema_date_hells));
-        localStorage.setItem('date',this.date);
-        localStorage.setItem('imgUrl',this.movie_detail.imgUrl);
-        localStorage.setItem('movie_name',this.movie_detail.name);
-        localStorage.setItem('language',this.movie_detail.language);
-      }
+        }
     },
 
     // 映射全局变量 city
@@ -274,7 +298,8 @@
         } else {
           this.setMessages();
         }
-      }
+      },
+      '$route':'setData'
     }
   }
 </script>
@@ -383,7 +408,7 @@
   }
 
   .md_date_active {
-    color: orange;
+    color: #cc0000;
   }
 
   #md_play_date {
@@ -402,7 +427,8 @@
   }
 
   #md_address {
-    color: gold;
+    color: #555555;
+    font-style: sans-serif;
   }
 
   .md_emphasis_content{
@@ -422,6 +448,7 @@
   }
 
   .md_span_play_date {
+    font-size: 80%;
     padding-left: 1%;
     padding-right: 1%;
     cursor: pointer;

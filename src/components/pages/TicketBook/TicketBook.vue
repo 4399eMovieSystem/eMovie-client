@@ -107,7 +107,7 @@ import { getData } from '../../../service/getData';
         tb_seats: null,
         tb_num_list: 8,
         tb_selected_seats: [],
-        tb_selected_max_num: 6,
+        tb_selected_max_num: 3,
       }
     },
     computed: {

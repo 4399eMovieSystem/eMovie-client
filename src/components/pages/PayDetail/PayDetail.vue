@@ -141,9 +141,9 @@ import { getData } from '../../../service/getData';
 
 #B2 {
     margin-top: 1.2vw;
+    margin-left: 17%;
     height: 90%;
     width: 70%;
-    padding-left: 15vw;
 }
 
 #B2 div{
@@ -167,20 +167,21 @@ import { getData } from '../../../service/getData';
 }
 
 #row_one div {
-    line-height: 3.5vw;
+    padding-top: 1vh;
     height: 100%;
 }
 #row_two {
     margin-top: -0.75vw;
-    height: 10vh;
+    height: 12vh;
     background-position:center;
     background-image:url("../../../assets/paydetail/支付页面电影信息.jpg");
+    padding-bottom: 2vh;
 }
 
 #row_two div {
-    line-height: 3.5vw;
     font-weight: bold;
     height: 100%;
+    width: 70%;
 }
 #total_price, #total_price span {
     font-size: 2vw;
@@ -189,9 +190,10 @@ import { getData } from '../../../service/getData';
 
 .pay_info_row input{
     height: 60%;
-    margin-top: 1vw;
-    margin-left: 1vw;
-    width: 50%;
+    margin-top: 1%;
+    margin-left: 1%;
+    width: 75%;
+    float: right;
     background-position:center;
     background-repeat: repeat-y;
     background-size: 100%;
@@ -200,7 +202,7 @@ import { getData } from '../../../service/getData';
 
 #pay_info {
     height: 20%;
-    width: 60%;
+    width: 40%;
     margin-top: 1vw;
 }
 
@@ -232,9 +234,9 @@ import { getData } from '../../../service/getData';
 }
 
 #pay {
-    position: absolute;
-    zoom: 50%;
-    left: 37%;
+    position: relative;
+    width: 10%;
+    left: 30%;
     margin-top: 2%;
     cursor: pointer;
 }
@@ -245,9 +247,10 @@ import { getData } from '../../../service/getData';
 }
 
 .pd_seat {
-    width: 33%;
-    height: 30%;
-    float: left;
+    width: 80%;
+    height: 20%;
+    left: 10%;
+    display:inline-block;
 }
 
 #seat_name {

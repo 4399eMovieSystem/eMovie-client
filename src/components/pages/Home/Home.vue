@@ -106,12 +106,14 @@
       left: 1%;
       top:40%;
       width:6%;
+      cursor: pointer;
     }
     #right{
       position: absolute;
       left:80.3%;
       width:6%;
       top:40%;
+      cursor: pointer;
     }
     .picone{
       width: 75%;

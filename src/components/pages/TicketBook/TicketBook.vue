@@ -64,7 +64,7 @@
         </div>
         <div class="mov_div">
             <span class="mov_info">座位</span>
-            <span class="text_bold" v-for="temp in tb_selected_seats">{{temp.row_col | my_filter}}</span>
+            <span class="seat_label" v-for="temp in tb_selected_seats">{{temp.row_col | my_filter}}</span>
         </div>
         <div class="mov_div">
             <span class="mov_info" id="total_price">总价</span>
@@ -261,14 +261,14 @@ import { getData } from '../../../service/getData';
     height: 40vw;
 }
 #seat_tag_list {
-    padding-left: 6vw;
+    margin-left: 10%;
     margin-top: 2%;
     height: 6%;
 }
 
 #seat_tag_list img {
     zoom: 40%;
-    padding-left: 10vw;
+    margin-left: 4%;
 }
 
 #h{
@@ -373,12 +373,12 @@ import { getData } from '../../../service/getData';
     margin-top: 0.75vw;
 }
 #total_price {
-    font-size: 130%;
+    font-size: 2vw;
 }
 
 #tb_total_price_value, #tb_total_price_value span {
     color: red;
-    font-size: 130%;
+    font-size: 3vw;
 }
 
 .seat {
@@ -440,6 +440,11 @@ import { getData } from '../../../service/getData';
     font-weight: bold;
 }
 
+.seat_label {
+    margin-right: 1vw;
+    font-weight: bold;
+    font-size: 1.7vw;
+}
 #mov_seat {
     color: black;
 }

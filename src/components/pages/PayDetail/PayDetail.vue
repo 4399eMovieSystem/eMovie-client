@@ -11,7 +11,7 @@
                 <div class="info">观影时间</div>
                 <div class="info">影片</div>
                 <div class="info"></div>
-                <div class="info">座位</div>
+                <div class="info" id="seat_name">座位</div>
             </div>
             <div id="row_two">
                 <div>{{pd_time}}</div>
@@ -248,5 +248,9 @@ import { getData } from '../../../service/getData';
     width: 33%;
     height: 30%;
     float: left;
+}
+
+#seat_name {
+    text-align: left;
 }
 </style>

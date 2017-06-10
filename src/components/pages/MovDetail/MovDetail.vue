@@ -385,7 +385,7 @@
 
   .md_content_item_key {
     font-size: 15pt;
-    color:gray; 
+    color: gray; 
   }
 
   .md_content_item_value {
@@ -454,8 +454,6 @@
     cursor: pointer;
     background-size: 100% 100%;
   }
-
-
 
   .md_screenings_content_title {
     padding-left: 3%;

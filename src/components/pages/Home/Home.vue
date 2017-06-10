@@ -3,10 +3,11 @@
     <div class="titlestyle">{{ title }}</div>
       <div>
         <img class="side_left" src="../../../assets/home/side.png"/>
-        <img class="left" src="../../../assets/home/left.png"/>
-        <img class="mainpic" src="../../../assets/home/main1.jpg" />
+        <img class="left" src="../../../assets/home/left.png" @click="clickleft()"/>
+        <div v-bind:class="{'picone': isone, 'pictwo': istwo, 'picthree': isthree}"></div>
+      
         <img class="side_right" src="../../../assets/home/side.png"/>
-        <img class="right" src="../../../assets/home/right.png"/>
+        <img id="right" src="../../../assets/home/right.png" @click="clickright()"/>
       </div>
   </div>
 </template>
@@ -19,11 +20,55 @@
       return {
         title: '欢迎来到快乐影购！',
         people: 'wenhan',
-        
+        index: 1,
+        isone:true,
+        istwo:false,
+        isthree:false
       }
     },
-  
-  }
+    methods: {  
+      clickright() {
+         if (this.index == 1){
+          this.index++;
+          this.isone=false;
+          this.istwo=true;
+          this.isthree=false;
+         }
+         else if (this.index == 2){
+          this.index++;
+          this.isone=false;
+          this.istwo=false;
+          this.isthree=true;
+         }
+         else if (this.index == 3){
+          this.index = 1;
+          this.isone=true;
+          this.istwo=false;
+          this.isthree=false;
+         }
+      },
+      clickleft() {
+         if (this.index == 1){
+          this.index=3;
+          this.isone=false;
+          this.istwo=false;
+          this.isthree=true;
+         }
+         else if (this.index == 2){
+          this.index--;
+          this.isone=true;
+          this.istwo=false;
+          this.isthree=false;
+         }
+         else if (this.index == 3){
+          this.index--;
+          this.isone=false;
+          this.istwo=true;
+          this.isthree=false;
+         }
+      }
+    }
+  }  
 </script>
 
 <style>
@@ -31,39 +76,63 @@
       position: absolute;
       left: 5%;
       top:14.5%;
-      font-size: 25px;
+      font-size: 28px;
       font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
       color: orange;
     }
-    .mainpic{
-      width: 53%;
-      position: absolute;
-      left: 20%;
-      top:20%;
+    #mainpic{
+
       
     }
     .side_left{
       position: absolute;
-      left: 15.8%;
-      top:20%;
-      height:72%;
+      left: 25%;
+      top:25%;
+      height:23.5vw;
     }
     .side_right{
       position: absolute;
-      left: 70%;
-      top:20%;
-      height:72%;
+      left: 70.4%;
+      top:25%;
+      height:23.5vw;
     }
     .left{
       position: absolute;
-      left:15.8%;
+      left:25%;
       top:50%;
-      width:4%;
+      width:3%;
     }
-    .right{
+    #right{
       position: absolute;
-      left: 70.4%;
+      left: 70.5%;
       top:50%;
-      width:4%;
+      width:3%;
+    }
+    .picone{
+      width: 40vw;
+      height: 24vw;
+      position: absolute;
+      left: 28%;
+      top:25%;
+      background-image: url("../../../assets/home/main1.jpg");
+      background-repeat: no-repeat;
+    }
+    .pictwo{
+      width: 40vw;
+      height: 24vw;
+      position: absolute;
+      left: 28%;
+      top:25%;
+      background-image: url("../../../assets/home/main2.jpg");
+      background-repeat: no-repeat;
+    }
+    .picthree{
+      width: 40vw;
+      height: 24vw;
+      position: absolute;
+      left: 28%;
+      top:25%;
+      background-image: url("../../../assets/home/main3.jpg");
+      background-repeat: no-repeat;
     }
 </style>

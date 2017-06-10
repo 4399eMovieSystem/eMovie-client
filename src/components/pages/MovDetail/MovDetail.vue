@@ -8,7 +8,7 @@
         </h1>
       </div>
 
-      <div id = "md_detail"  class="md_emphasis_content md_movie_introduction">
+      <div id = "md_detail"  class=" md_movie_introduction">
 
 
         <div id = "md_poster">
@@ -263,6 +263,7 @@
             console.log("movie_detail="+this.movie_detail);
             if (this.movie_detail == null) {
               this.error_message = '未找到该电影';
+              this.error_message_2 = '';
             } else if (response.status === 'OK') {
               // this.play_cinemas = response.data.play_cinemas;
               this.all_cinemas = response.data.play_cinemas;
@@ -490,9 +491,11 @@
   }
 
   .md_error {
-    padding: 2%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    font-size: 1.6vw;
     font-family: sans-serif;
-    color: orange;
+    color: OrangeRed;
   }
 
 </style>

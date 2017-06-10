@@ -1,37 +1,37 @@
 <template>
   <div id="CinDetail">
-    <div class='CinDetail_p'>{{name}}</div>
+    <div class='CinDetail_title'>{{name}}</div>
     <div class="CinDetail_div">
-      <div class='CinDetail_text'>地址: {{address}} </div>
-      <div class='CinDetail_text'>联系方式:  {{phone}} </div>
+      <div class='CinDetail_t'>地址: {{address}} </div>
+      <div class='CinDetail_t'>联系方式:  {{phone}} </div>
     </div>
-    <div class='CinDetail_p'>电影列表</div>
+    <div class='CinDetail_title'>电影列表</div>
     <div class="CinDetail_div">
     <img class="CinDetail_img" v-for="move in movies" v-bind:src="move.imgUrl" @click="CinDetail_movie(move)">
 
     </div>
 
-    <div class='CinDetail_p'>{{movie.name}}</div>
+    <div class='CinDetail_title'>{{movie.name}}</div>
     <div class="CinDetail_div">
-      <div class='CinDetail_text'>时长: {{movie.length}}</div>
-      <div class='CinDetail_text'>类型: {{movie.type}}</div>
+      <div class='CinDetail_t'>时长: {{movie.length}}</div>
+      <div class='CinDetail_t'>类型: {{movie.type}}</div>
     </div>
-    <div class='CinDetail_p'>观影时间</div>
+    <div class='CinDetail_title'>观影时间</div>
     <div class="CinDetail_div">
     <table>
       <tr>
-        <th class='CinDetail_text'>放映时间</th>
-        <th class='CinDetail_text'>类型</th>
-        <th class='CinDetail_text'>放映厅</th>
-        <th class='CinDetail_text'>在线售价</th>
-        <th class='CinDetail_text'>在线选座</th>
+        <th class='CinDetail_t'>放映时间</th>
+        <th class='CinDetail_t'>类型</th>
+        <th class='CinDetail_t'>放映厅</th>
+        <th class='CinDetail_t'>在线售价</th>
+        <th class='CinDetail_t'>在线选座</th>
       </tr>
       <tr v-for="ascreen in screens">
-        <td class='CinDetail_text'>{{ascreen.starttime}}</td>
-        <td class='CinDetail_text'>{{ascreen.type}}</td>
-        <td class='CinDetail_text'>{{ascreen.name}}</td>
-        <td class='CinDetail_text'>{{ascreen.price}}</td>
-        <td class='CinDetail_text'><router-link :to="{ name: 'MovDetail', params: { mov_id: m_id} }">
+        <td class='CinDetail_t'>{{ascreen.starttime}}</td>
+        <td class='CinDetail_t'>{{ascreen.type}}</td>
+        <td class='CinDetail_t'>{{ascreen.name}}</td>
+        <td class='CinDetail_t'>{{ascreen.price}}</td>
+        <td class='CinDetail_t'><router-link :to="{ name: 'MovDetail', params: { mov_id: m_id} }">
             <button>在线选座</button>
           </router-link></td>
       </tr>
@@ -47,9 +47,9 @@ import { getData } from '../../../service/getData';
     name: 'cin-detail',
     data() {
       return {
-        name: '万达国际影城(白云万达广场店)',
-        address: '白云万达广场',
-        cin_id: 5,
+        name: '',
+        address: '',
+        cin_id: 1,
         actor: '1',
         phone: 1,
         director: '1',
@@ -73,7 +73,7 @@ import { getData } from '../../../service/getData';
             if (this.movie == null) this.movie = data.movies[0];
             var ob = data.vedio_hells[this.m_id];
             this.vedio_hells = data.vedio_hells;
-            this.screens = ob["2017-8-10"];
+            this.screens = ob["2017-6-10"];
           })
           .catch(err => {
             console.log('cin_mov err', err);
@@ -84,7 +84,7 @@ import { getData } from '../../../service/getData';
           this.m_id = movie.mov_id;
           this.movie = movie;
           var ob = this.vedio_hells[this.m_id];
-          this.screens = ob["2017-8-10"];
+          this.screens = ob["2017-6-10"];
           console.log(this.m_id);
       }
     }
@@ -95,7 +95,7 @@ import { getData } from '../../../service/getData';
 .CinDetail {
   font-family: Georgia, Garamond, serif;
 }
-.CinDetail_p {
+.CinDetail_title {
   width:auto;
   display:inline-block !important; 
   display:inline;
@@ -113,13 +113,13 @@ import { getData } from '../../../service/getData';
   margin-left: 1%;
   border: 3px solid white;
   cursor: pointer;
-  transition: all 0.6s;
+  transition: all 0.5s;
 }
 .CinDetail_img:hover {
   border-color: green;
   transform: scale(1.1);
 }
-.CinDetail_text {
+.CinDetail_t {
   margin-bottom: 1%;
 }
 .CinDetail_div {

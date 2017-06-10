@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="titlestyle">{{ title }}</div>
-      <div>
+      <div id="all">
         <img class="side_left" src="../../../assets/home/side.png"/>
         <img class="left" src="../../../assets/home/left.png" @click="clickleft()"/>
         <div v-bind:class="{'picone': isone, 'pictwo': istwo, 'picthree': isthree}"></div>
@@ -80,42 +80,48 @@
       font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
       color: orange;
     }
-    #mainpic{
-
-      
+    #all{
+     width:60vw;
+     height: 40vw;
+      position: absolute;
+      left:23%;
+      top:20%;
     }
     .side_left{
       position: absolute;
-      left: 25%;
-      top:25%;
-      height:23.5vw;
+      left: 1%;
+      top:8%;
+      width: 6%;
+      height:67%;
     }
     .side_right{
       position: absolute;
-      left: 70.4%;
-      top:25%;
-      height:23.5vw;
+      left:80%;
+      top:8%;
+      width: 6%;
+      height:67%;
     }
     .left{
       position: absolute;
-      left:25%;
-      top:50%;
-      width:3%;
+      left: 1%;
+      top:40%;
+      width:6%;
     }
     #right{
       position: absolute;
-      left: 70.5%;
-      top:50%;
-      width:3%;
+      left:80.3%;
+      width:6%;
+      top:40%;
     }
     .picone{
-      width: 40vw;
-      height: 24vw;
+      width: 75%;
+      height: 78%;
       position: absolute;
-      left: 28%;
-      top:25%;
+      left: 7%;
+      top:8%;
       background-image: url("../../../assets/home/main1.jpg");
       background-repeat: no-repeat;
+      background-size: 100%,100%;
     }
     .pictwo{
       width: 40vw;
@@ -125,6 +131,7 @@
       top:25%;
       background-image: url("../../../assets/home/main2.jpg");
       background-repeat: no-repeat;
+      background-size: 100%,100%;
     }
     .picthree{
       width: 40vw;
@@ -134,5 +141,6 @@
       top:25%;
       background-image: url("../../../assets/home/main3.jpg");
       background-repeat: no-repeat;
+      background-size: 100%,100%;
     }
 </style>

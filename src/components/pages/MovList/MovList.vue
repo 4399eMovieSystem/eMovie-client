@@ -139,7 +139,13 @@
   .image{
     width:10vw;
     height:13vw;
+    cursor: pointer;
+  transition: all 0.5s;
   }
+  .image:hover {
+  border-color: green;
+  transform: scale(1.1);
+}
   #post1{
     position: absolute;
     left:3%;

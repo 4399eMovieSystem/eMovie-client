@@ -65,7 +65,7 @@ const APIS = {
   },
   // 确定订单支付
   pay: {
-    url: '/movies/:mov_id/order/makesure',
+    url: '/api/movies/:mov_id/order/makesure',
     method: 'POST'
   },
   // 提交订单

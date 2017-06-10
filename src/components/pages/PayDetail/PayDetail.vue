@@ -90,6 +90,7 @@ import { getData } from '../../../service/getData';
             .then(data => {
             if(data.status == 'OK') {
                 alert("您已成功购票！");
+                this.$router.push({name: 'Home'});
             } else {
                 alert("支付账号或密码错误！");
             }

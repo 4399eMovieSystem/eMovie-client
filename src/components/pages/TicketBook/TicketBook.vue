@@ -34,7 +34,9 @@
         </div>
     <div id="mov_info">
         <div id="tb_mov_name">{{tb_mov_name}}</div>
-        <img id="tb_mov_img" v-bind:src="tb_img_url">
+        <div id="tb_mov_img_div">
+            <img id="tb_mov_img" v-bind:src="tb_img_url">
+        </div>
         <div id="len_and_version">
             <div id="empty"></div>
             <div class="mov_div">
@@ -341,21 +343,24 @@ import { getData } from '../../../service/getData';
 }
 
 #tb_mov_img {
-    width: 45%;
-    height: 27%;
+    height: 100%;
+}
+#tb_mov_img_div {
+    width: 35%;
+    height: 30%;
     margin-right: 5%;
     margin-bottom: 3%;
     float: left;
 }
-
 #len_and_version {
-    width: 50%;
+    width: 57%;
     height: 30%;
-    float: right;
+    margin-bottom: 3%;
+    float: left;
 }
 
 #empty {
-    height: 60%;
+    height: 50%;
 }
 
 #submit {
